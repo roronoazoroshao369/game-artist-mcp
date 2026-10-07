@@ -7,10 +7,11 @@ import { join, resolve } from "node:path";
 import { applyOperations } from "../core/engine.mjs";
 import { renderSvg } from "../core/render-svg.mjs";
 import { validateDocument } from "../core/validate.mjs";
+import { exportGodotCutout } from "../export/godot-cutout.mjs";
 import { AssetStore } from "./store.mjs";
 
 const PROTOCOL_VERSION = "2025-11-25";
-const SERVER_VERSION = "0.0.2";
+const SERVER_VERSION = "0.0.3";
 
 function parseWorkspace(argv) {
   const index = argv.indexOf("--workspace");
@@ -159,6 +160,19 @@ const tools = [
       required: ["asset_id"],
       additionalProperties: false
     }
+  },
+  {
+    name: "export_godot_cutout",
+    description: "Export the current explicit art document plus structured cutout metadata into a bounded Godot 4 project.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        asset_id: { type: "string" },
+        cutout: { type: "object" }
+      },
+      required: ["asset_id", "cutout"],
+      additionalProperties: false
+    }
   }
 ];
 
@@ -283,6 +297,25 @@ async function callTool(name, args) {
           `assets/${args.asset_id}/output/asset.png`,
           `assets/${args.asset_id}/output/report.json`
         ]
+      });
+    }
+
+    case "export_godot_cutout": {
+      const state = await store.load(args.asset_id);
+      const outputDir = join(store.assetDir(args.asset_id), "godot");
+      await rm(outputDir, { recursive: true, force: true });
+      await mkdir(outputDir, { recursive: true, mode: 0o700 });
+      const result = await exportGodotCutout({
+        document: state.document,
+        cutout: args.cutout,
+        outputDir
+      });
+      return textResult({
+        asset_id: args.asset_id,
+        revision: state.revision,
+        parts: result.parts,
+        animations: result.animations,
+        project: `assets/${args.asset_id}/godot`
       });
     }
 
