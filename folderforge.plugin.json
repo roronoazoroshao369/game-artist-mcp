@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "id": "game-artist",
+  "name": "Game Artist",
+  "version": "0.0.2",
+  "description": "Deterministic AI-native game-art workstation tools.",
+  "compatibility": {
+    "folderforge": ">=3.0.1",
+    "mcpProtocol": "2025-11-25"
+  },
+  "runtime": {
+    "command": "node",
+    "args": [
+      "{pluginDir}/src/mcp/server.mjs",
+      "--workspace",
+      "{projectRoot}/.game-artist"
+    ],
+    "facade": false
+  },
+  "permissions": {
+    "network": false,
+    "filesystem": "workspace",
+    "env": []
+  },
+  "risk": {
+    "default": {
+      "risk": "MEDIUM",
+      "mutates": true
+    },
+    "tools": {
+      "health": { "risk": "LOW", "mutates": false },
+      "asset_create": { "risk": "MEDIUM", "mutates": true },
+      "asset_get": { "risk": "LOW", "mutates": false },
+      "document_query": { "risk": "LOW", "mutates": false },
+      "document_apply_ops": { "risk": "MEDIUM", "mutates": true },
+      "render_preview": { "risk": "LOW", "mutates": false },
+      "validate_asset": { "risk": "LOW", "mutates": false },
+      "export_asset": { "risk": "MEDIUM", "mutates": true }
+    }
+  }
+}
