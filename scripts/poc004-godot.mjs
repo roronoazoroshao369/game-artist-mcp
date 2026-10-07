@@ -26,7 +26,7 @@ child.stdout.setEncoding("utf8");
 child.stdout.on("data", (chunk) => {
   buffer += chunk;
   for (;;) {
-    const newline = buffer.indexOf("\\n");
+    const newline = buffer.indexOf("\n");
     if (newline < 0) break;
     const line = buffer.slice(0, newline).trim();
     buffer = buffer.slice(newline + 1);
@@ -59,7 +59,7 @@ function request(method, params = undefined) {
       id: requestId,
       method,
       ...(params === undefined ? {} : { params })
-    }) + "\\n");
+    }) + "\n");
   });
 }
 
