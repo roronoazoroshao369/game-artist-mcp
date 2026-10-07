@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "assetId": "spirit_lantern",
+  "parts": [
+    {
+      "id": "body",
+      "nodes": [
+        "handle",
+        "handle_inner",
+        "roof",
+        "roof_highlight",
+        "frame_body",
+        "glass",
+        "glass_glow",
+        "base",
+        "left_hook",
+        "right_hook",
+        "frame_edge_left",
+        "frame_edge_right",
+        "roof_rivet"
+      ],
+      "pivot": [
+        128,
+        160
+      ],
+      "parent": null,
+      "zIndex": 0,
+      "role": "body"
+    },
+    {
+      "id": "flame",
+      "nodes": [
+        "flame",
+        "flame_core"
+      ],
+      "pivot": [
+        128,
+        180
+      ],
+      "parent": "body",
+      "zIndex": 4,
+      "role": "emission"
+    },
+    {
+      "id": "talisman_left",
+      "nodes": [
+        "talisman_left",
+        "seal_left",
+        "glyph_left"
+      ],
+      "pivot": [
+        80,
+        142
+      ],
+      "parent": "body",
+      "zIndex": 3,
+      "role": "secondary_motion"
+    },
+    {
+      "id": "talisman_right",
+      "nodes": [
+        "talisman_right",
+        "seal_right",
+        "glyph_right"
+      ],
+      "pivot": [
+        176,
+        142
+      ],
+      "parent": "body",
+      "zIndex": 3,
+      "role": "secondary_motion"
+    },
+    {
+      "id": "tassel",
+      "nodes": [
+        "tassel_cord",
+        "tassel",
+        "tassel_fringe_left",
+        "tassel_fringe_center",
+        "tassel_fringe_right"
+      ],
+      "pivot": [
+        128,
+        264
+      ],
+      "parent": "body",
+      "zIndex": 2,
+      "role": "secondary_motion"
+    }
+  ],
+  "animations": [
+    {
+      "id": "idle",
+      "length": 2,
+      "loop": true,
+      "tracks": [
+        {
+          "part": "talisman_left",
+          "property": "rotation",
+          "keys": [
+            {
+              "time": 0,
+              "value": -0.035
+            },
+            {
+              "time": 1,
+              "value": 0.055
+            },
+            {
+              "time": 2,
+              "value": -0.035
+            }
+          ]
+        },
+        {
+          "part": "talisman_right",
+          "property": "rotation",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0.045
+            },
+            {
+              "time": 1,
+              "value": -0.04
+            },
+            {
+              "time": 2,
+              "value": 0.045
+            }
+          ]
+        },
+        {
+          "part": "tassel",
+          "property": "rotation",
+          "keys": [
+            {
+              "time": 0,
+              "value": 0.025
+            },
+            {
+              "time": 1,
+              "value": -0.065
+            },
+            {
+              "time": 2,
+              "value": 0.025
+            }
+          ]
+        },
+        {
+          "part": "flame",
+          "property": "scale",
+          "keys": [
+            {
+              "time": 0,
+              "value": [
+                1,
+                0.98
+              ]
+            },
+            {
+              "time": 1,
+              "value": [
+                0.96,
+                1.06
+              ]
+            },
+            {
+              "time": 2,
+              "value": [
+                1,
+                0.98
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "light": {
+    "part": "flame",
+    "position": [
+      128,
+      174
+    ],
+    "color": "#72f5ec",
+    "energy": 0.85,
+    "textureScale": 2.2
+  },
+  "collision": {
+    "position": [
+      128,
+      170
+    ],
+    "size": [
+      86,
+      176
+    ]
+  }
+}
