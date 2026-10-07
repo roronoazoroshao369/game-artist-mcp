@@ -302,6 +302,187 @@ const draftOps = [
   }
 ];
 
+const correctionOps = [
+  {
+    type: "node.update",
+    id: "roof",
+    patch: {
+      points: [[84, 74], [128, 45], [175, 69], [160, 92], [98, 89]],
+      fill: "#4d392f",
+      strokeWidth: 9
+    }
+  },
+  {
+    type: "node.update",
+    id: "roof_highlight",
+    patch: {
+      d: "M98 73 Q126 54 159 70",
+      stroke: "#a0785f",
+      strokeWidth: 3
+    }
+  },
+  {
+    type: "node.update",
+    id: "frame_body",
+    patch: {
+      d: "M91 87 L101 238 Q126 263 155 240 L166 84 Z",
+      fill: "#3d302b"
+    }
+  },
+  {
+    type: "node.update",
+    id: "glass",
+    patch: {
+      d: "M108 102 Q128 91 150 103 L144 223 Q126 240 110 220 Z",
+      fill: "#438f8d"
+    }
+  },
+  {
+    type: "node.update",
+    id: "flame",
+    patch: {
+      d: "M125 207 C105 193 108 174 123 158 C134 146 137 133 133 118 C154 131 162 151 150 170 C142 182 139 191 149 201 C143 220 131 229 125 207 Z",
+      fill: "#b9fff4",
+      strokeWidth: 3
+    }
+  },
+  {
+    type: "node.update",
+    id: "flame_core",
+    patch: {
+      d: "M128 200 C118 190 119 179 128 169 C136 160 138 152 135 144 C147 154 148 168 140 180 C135 187 135 194 140 199 C137 207 131 209 128 200 Z"
+    }
+  },
+  {
+    type: "node.update",
+    id: "talisman_left",
+    patch: {
+      points: [[54, 136], [82, 141], [77, 205], [58, 210], [61, 186]],
+      fill: "#d8c59d"
+    }
+  },
+  {
+    type: "node.update",
+    id: "talisman_right",
+    patch: {
+      points: [[173, 141], [201, 135], [198, 207], [177, 201], [181, 181]],
+      fill: "#d8c59d"
+    }
+  },
+  {
+    type: "node.update",
+    id: "seal_left",
+    patch: { cx: 68, cy: 171, rx: 5, ry: 6 }
+  },
+  {
+    type: "node.update",
+    id: "seal_right",
+    patch: { cx: 188, cy: 169, rx: 5, ry: 6 }
+  },
+  {
+    type: "node.update",
+    id: "tassel",
+    patch: {
+      points: [[118, 287], [138, 287], [142, 297], [128, 303], [114, 297]],
+      fill: "#7f312f",
+      strokeWidth: 4
+    }
+  },
+  {
+    type: "node.add",
+    node: {
+      id: "glyph_left",
+      type: "path",
+      d: "M64 153 L73 159 L65 166 L74 174 L64 184",
+      fill: "none",
+      stroke: "#8c332e",
+      strokeWidth: 3
+    }
+  },
+  {
+    type: "node.add",
+    node: {
+      id: "glyph_right",
+      type: "path",
+      d: "M184 152 Q193 159 185 166 Q178 173 190 181",
+      fill: "none",
+      stroke: "#8c332e",
+      strokeWidth: 3
+    }
+  },
+  {
+    type: "node.add",
+    node: {
+      id: "frame_edge_left",
+      type: "path",
+      d: "M99 96 C98 135 100 193 106 229",
+      fill: "none",
+      stroke: "#8c6650",
+      strokeWidth: 3,
+      opacity: 0.75
+    }
+  },
+  {
+    type: "node.add",
+    node: {
+      id: "frame_edge_right",
+      type: "path",
+      d: "M157 94 C158 141 155 196 149 228",
+      fill: "none",
+      stroke: "#2a211e",
+      strokeWidth: 4,
+      opacity: 0.9
+    }
+  },
+  {
+    type: "node.add",
+    node: {
+      id: "tassel_fringe_left",
+      type: "polygon",
+      points: [[119, 299], [125, 301], [121, 317], [113, 313]],
+      fill: "#923a35",
+      stroke: "#2f1f1e",
+      strokeWidth: 3
+    }
+  },
+  {
+    type: "node.add",
+    node: {
+      id: "tassel_fringe_center",
+      type: "polygon",
+      points: [[125, 300], [132, 300], [132, 319], [124, 319]],
+      fill: "#a3423b",
+      stroke: "#2f1f1e",
+      strokeWidth: 3
+    }
+  },
+  {
+    type: "node.add",
+    node: {
+      id: "tassel_fringe_right",
+      type: "polygon",
+      points: [[132, 301], [138, 299], [145, 313], [135, 318]],
+      fill: "#82312f",
+      stroke: "#2f1f1e",
+      strokeWidth: 3
+    }
+  },
+  {
+    type: "node.add",
+    node: {
+      id: "roof_rivet",
+      type: "ellipse",
+      cx: 151,
+      cy: 77,
+      rx: 3,
+      ry: 3,
+      fill: "#b28a62",
+      stroke: "#251d19",
+      strokeWidth: 1
+    }
+  }
+];
+
 try {
   const init = await request("initialize", {
     protocolVersion: "2025-11-25",
@@ -341,22 +522,68 @@ try {
   );
   await cp(
     join(workspace, "assets", "spirit_lantern", "output", "report.json"),
-    join(generatedDir, "technical-report.json")
+    join(generatedDir, "technical-report-draft.json")
+  );
+
+  // Visual critique of the real CI draft:
+  // - silhouette was readable but too clean and symmetrical;
+  // - talismans read as blank rectangular "ears";
+  // - tassel read as a geometric weight rather than cloth;
+  // - frame lacked handmade asymmetry and secondary detail;
+  // - flame was readable but overly centered/stiff.
+  // Apply targeted edits to the existing revision instead of regenerating it.
+  const corrected = await tool("document_apply_ops", {
+    asset_id: "spirit_lantern",
+    expected_revision: 1,
+    idempotency_key: "poc003-vision-correction-1",
+    operations: correctionOps
+  });
+  assert.equal(parseText(corrected).revision, 2);
+
+  const correctedValidation = parseText(
+    await tool("validate_asset", { asset_id: "spirit_lantern" })
+  );
+  assert.equal(correctedValidation.ok, true);
+
+  const correctedPreview = await tool("render_preview", { asset_id: "spirit_lantern" });
+  const correctedPng = imageBytes(correctedPreview);
+  assert.deepEqual(
+    [...correctedPng.subarray(0, 8)],
+    [137, 80, 78, 71, 13, 10, 26, 10]
+  );
+  await writeFile(join(generatedDir, "corrected.png"), correctedPng);
+
+  await tool("export_asset", { asset_id: "spirit_lantern" });
+  await cp(
+    join(workspace, "assets", "spirit_lantern", "output", "asset.svg"),
+    join(generatedDir, "corrected.svg")
+  );
+  await cp(
+    join(workspace, "assets", "spirit_lantern", "output", "report.json"),
+    join(generatedDir, "technical-report-corrected.json")
   );
 
   const benchmark = {
     benchmark: "POC-003",
     asset: "spirit_lantern",
-    stage: "draft-awaiting-visual-critique",
+    stage: "corrected-awaiting-final-visual-review",
     protocol: "MCP",
     toolCalls,
     operations: operationCount,
     renders: renderCalls,
-    correctionIterations: 0,
-    hardValidationErrors: validation.errors.length,
+    correctionIterations: 1,
+    hardValidationErrors: correctedValidation.errors.length,
     elapsedMs: Date.now() - startedAt,
-    finalRevision: 1,
-    visualReview: "PENDING"
+    finalRevision: 2,
+    visualReview: "CORRECTION_APPLIED_PENDING_FINAL_REVIEW",
+    critiqueSource: "ChatGPT vision inspection of the CI-rendered draft artifact",
+    observedDefects: [
+      "too clean and symmetrical",
+      "talismans read as blank rectangular ears",
+      "tassel read as a geometric weight",
+      "frame lacked handmade asymmetry and secondary detail",
+      "flame was overly centered and stiff"
+    ]
   };
 
   await writeFile(
