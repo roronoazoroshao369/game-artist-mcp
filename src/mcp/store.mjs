@@ -50,6 +50,7 @@ export class AssetStore {
       throw new Error("POC canvas limit is 4096x4096");
     }
 
+    await this.init();
     const dir = this.assetDir(assetId);
     await mkdir(dir, { recursive: false, mode: 0o700 }).catch((error) => {
       if (error?.code === "EEXIST") throw new Error(`asset already exists: ${assetId}`);
