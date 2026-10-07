@@ -51,9 +51,12 @@ jobs:
         run: |
           test -s examples/spirit-lantern/generated/draft.png
           test -s examples/spirit-lantern/generated/draft.svg
-          test -s examples/spirit-lantern/generated/technical-report.json
+          test -s examples/spirit-lantern/generated/technical-report-draft.json
+          test -s examples/spirit-lantern/generated/corrected.png
+          test -s examples/spirit-lantern/generated/corrected.svg
+          test -s examples/spirit-lantern/generated/technical-report-corrected.json
           test -s examples/spirit-lantern/generated/benchmark.json
-          grep -q '"visualReview": "PENDING"' examples/spirit-lantern/generated/benchmark.json
+          grep -q '"visualReview": "CORRECTION_APPLIED_PENDING_FINAL_REVIEW"' examples/spirit-lantern/generated/benchmark.json
 
       - name: Build exact FolderForge integration fixture
         run: |
