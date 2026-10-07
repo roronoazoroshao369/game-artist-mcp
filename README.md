@@ -85,11 +85,17 @@ Run the direct protocol smoke:
 npm run smoke:mcp
 ```
 
-With FolderForge 3.0.1+ installed:
+To verify the FolderForge integration before the compatible package is published, build the exact source revision used by CI:
 
 ```bash
-folderforge plugin validate .
-folderforge plugin test . --call health --args-json '{}'
+git clone https://github.com/roronoazoroshao369/FolderForge.git ../FolderForge
+git -C ../FolderForge checkout 59c1096167a81bef24a07fa88453f5c50e0fe64a
+npm --prefix ../FolderForge ci --ignore-scripts
+npm --prefix ../FolderForge run build
+node ../FolderForge/dist/main.js plugin validate .
+node ../FolderForge/dist/main.js plugin test . --call health --args-json '{}'
 ```
+
+Do not infer npm availability from FolderForge's source `package.json`; POC-002 pins source evidence until a compatible public package is actually published.
 
 The next falsification gate is POC-003: a real vision-capable agent must construct an asset, inspect the returned PNG, critique it and improve it through MCP edits.
