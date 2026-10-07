@@ -56,7 +56,7 @@ jobs:
           test -s examples/spirit-lantern/generated/corrected.svg
           test -s examples/spirit-lantern/generated/technical-report-corrected.json
           test -s examples/spirit-lantern/generated/benchmark.json
-          grep -q '"visualReview": "CORRECTION_APPLIED_PENDING_FINAL_REVIEW"' examples/spirit-lantern/generated/benchmark.json
+          grep -q '"visualReview": "PASSED_VISUAL_LOOP"' examples/spirit-lantern/generated/benchmark.json
 
       - name: Build exact FolderForge integration fixture
         run: |
