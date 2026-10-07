@@ -1,0 +1,14 @@
+{
+  "name": "game-artist-mcp",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test",
+    "poc": "node scripts/run-poc.mjs",
+    "check": "npm test && npm run poc"
+  }
+}
