@@ -1,0 +1,51 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+      - "poc/**"
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  poc:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install SVG rasterizer
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y librsvg2-bin
+
+      - name: Install package metadata
+        run: npm install --ignore-scripts
+
+      - name: Run tests
+        run: npm test
+
+      - name: Render POC fixture
+        env:
+          REQUIRE_PNG: "1"
+        run: npm run poc
+
+      - name: Assert generated artifacts
+        run: |
+          test -s examples/jade-spirit-stone/generated/jade-spirit-stone.svg
+          test -s examples/jade-spirit-stone/generated/jade-spirit-stone.png
+          test -s examples/jade-spirit-stone/generated/report.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: poc-001-jade-spirit-stone
+          path: examples/jade-spirit-stone/generated/
