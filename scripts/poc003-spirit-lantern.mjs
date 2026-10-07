@@ -566,7 +566,7 @@ try {
   const benchmark = {
     benchmark: "POC-003",
     asset: "spirit_lantern",
-    stage: "corrected-awaiting-final-visual-review",
+    stage: "visual-loop-verified",
     protocol: "MCP",
     toolCalls,
     operations: operationCount,
@@ -575,7 +575,17 @@ try {
     hardValidationErrors: correctedValidation.errors.length,
     elapsedMs: Date.now() - startedAt,
     finalRevision: 2,
-    visualReview: "CORRECTION_APPLIED_PENDING_FINAL_REVIEW",
+    visualReview: "PASSED_VISUAL_LOOP",
+    visualImprovement: "MATERIAL_BUT_MODEST",
+    productionQuality: "NOT_CLAIMED",
+    finalReviewSource: "ChatGPT vision inspection of both CI-rendered draft.png and corrected.png",
+    finalReviewFindings: [
+      "talisman symbols now read as intentional details rather than blank ears",
+      "tassel now reads more like a fringed cloth ornament",
+      "minor asymmetry and secondary frame details improve handmade character",
+      "silhouette remains readable at gameplay scale",
+      "overall art is still simple and below the intended production art ceiling"
+    ],
     critiqueSource: "ChatGPT vision inspection of the CI-rendered draft artifact",
     observedDefects: [
       "too clean and symmetrical",
