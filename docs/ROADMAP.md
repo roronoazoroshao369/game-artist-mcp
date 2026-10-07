@@ -30,7 +30,7 @@ Evidence already merged:
 
 This proves mechanics, not artistic quality.
 
-## Phase 1 — POC-002: real child MCP + FolderForge integration
+## Phase 1 — POC-002: real child MCP + FolderForge integration — PASS
 
 ### Build
 
@@ -66,7 +66,7 @@ PASS only when:
 7. FolderForge validates and starts the package as a real child plugin;
 8. CI passes on exact PR head.
 
-## Phase 2 — POC-003: autonomous render → inspect → edit loop
+## Phase 2 — POC-003: autonomous render → inspect → edit loop — PASS (mechanics)
 
 Use an MCP-capable vision host to construct and correct:
 
@@ -83,13 +83,16 @@ Measure:
 - hard validator failures;
 - output hashes.
 
-Gate target for a simple prop:
+Verified Spirit Lantern evidence:
 
-- <= 50 MCP round trips;
-- <= 5 visual correction iterations;
-- zero hard technical validation errors;
-- clear improvement after at least one visual critique;
-- independent/human visual review before any production-quality claim.
+- 9 MCP tool calls;
+- 37 explicit operations;
+- 2 preview renders;
+- 1 real vision-driven correction iteration;
+- zero hard validation errors;
+- the corrected render is materially but modestly better.
+
+This passes the closed visual-loop mechanics. It does **not** prove production-quality art. The current visual ceiling remains a primary risk to attack in later style/abstraction work.
 
 ## Phase 3 — game-ready Spirit Lantern vertical slice
 
