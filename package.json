@@ -14,4 +14,4 @@
     "check": "npm test && npm run poc && npm run smoke:mcp && npm run poc:003",
     "poc:003": "node scripts/poc003-spirit-lantern.mjs"
   }
-}\n
+}
