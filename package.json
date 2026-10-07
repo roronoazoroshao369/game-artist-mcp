@@ -1,6 +1,6 @@
 {
   "name": "game-artist-mcp",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "type": "module",
   "engines": {
@@ -9,6 +9,8 @@
   "scripts": {
     "test": "node --test",
     "poc": "node scripts/run-poc.mjs",
-    "check": "npm test && npm run poc"
+    "mcp": "node src/mcp/server.mjs",
+    "smoke:mcp": "node scripts/mcp-smoke.mjs",
+    "check": "npm test && npm run poc && npm run smoke:mcp"
   }
 }
