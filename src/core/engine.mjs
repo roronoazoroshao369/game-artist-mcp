@@ -1,4 +1,3 @@
-import { structuredClone } from "node:util";
 import { validateDocument } from "./validate.mjs";
 
 function clone(value) {
