@@ -17,6 +17,9 @@ jobs:
 
     env:
       FOLDERFORGE_SHA: 59c1096167a81bef24a07fa88453f5c50e0fe64a
+      GODOT_VERSION: 4.7.2-stable
+      GODOT_SHA256: cadd3204e728a35d3f13adb7fd0d7902636b79f6b95c40c265eb73b6c35329e4
+      GODOT_BIN: /tmp/godot/Godot_v4.7.2-stable_linux.x86_64
 
     steps:
       - uses: actions/checkout@v4
@@ -58,6 +61,26 @@ jobs:
           test -s examples/spirit-lantern/generated/benchmark.json
           grep -q '"visualReview": "PASSED_VISUAL_LOOP"' examples/spirit-lantern/generated/benchmark.json
 
+      - name: Generate POC-004 Godot cutout project
+        run: npm run poc:004
+
+      - name: Install pinned Godot
+        run: |
+          curl -L --fail --retry 3 \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip" \
+            -o /tmp/godot.zip
+          echo "${GODOT_SHA256}  /tmp/godot.zip" | sha256sum -c -
+          mkdir -p /tmp/godot
+          unzip -q /tmp/godot.zip -d /tmp/godot
+          chmod +x "${GODOT_BIN}"
+          "${GODOT_BIN}" --version
+
+      - name: Verify generated Godot project headlessly
+        run: |
+          "${GODOT_BIN}" --headless --path examples/spirit-lantern/generated/godot --editor --quit 2>&1 | tee examples/spirit-lantern/generated/godot-import.log
+          "${GODOT_BIN}" --headless --path examples/spirit-lantern/generated/godot 2>&1 | tee examples/spirit-lantern/generated/godot-run.log
+          grep -q "GAME_ARTIST_POC004_OK" examples/spirit-lantern/generated/godot-run.log
+
       - name: Build exact FolderForge integration fixture
         run: |
           git clone --filter=blob:none --no-checkout https://github.com/roronoazoroshao369/FolderForge.git ../FolderForge
@@ -87,3 +110,11 @@ jobs:
         with:
           name: poc-003-spirit-lantern-draft
           path: examples/spirit-lantern/generated/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: poc-004-godot-spirit-lantern
+          path: |
+            examples/spirit-lantern/generated/godot/
+            examples/spirit-lantern/generated/godot-import.log
+            examples/spirit-lantern/generated/godot-run.log
