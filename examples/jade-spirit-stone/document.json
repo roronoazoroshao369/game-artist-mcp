@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "canvas": {
+    "width": 128,
+    "height": 128,
+    "background": "transparent"
+  },
+  "nodes": [
+    {
+      "id": "outer-silhouette",
+      "type": "polygon",
+      "points": [[64, 7], [93, 24], [111, 58], [100, 96], [65, 120], [29, 98], [17, 61], [34, 26]],
+      "fill": "#243c36",
+      "stroke": "#171817",
+      "strokeWidth": 8
+    },
+    {
+      "id": "jade-body",
+      "type": "polygon",
+      "points": [[64, 17], [86, 31], [99, 59], [90, 88], [64, 107], [39, 89], [29, 61], [42, 32]],
+      "fill": "#6fae8c",
+      "stroke": "#355e4d",
+      "strokeWidth": 4
+    },
+    {
+      "id": "facet-left",
+      "type": "polygon",
+      "points": [[64, 17], [42, 32], [51, 62], [64, 58]],
+      "fill": "#8dc5a4",
+      "stroke": "none",
+      "strokeWidth": 0,
+      "opacity": 0.9
+    },
+    {
+      "id": "facet-right",
+      "type": "polygon",
+      "points": [[64, 17], [86, 31], [78, 61], [64, 58]],
+      "fill": "#4f8d73",
+      "stroke": "none",
+      "strokeWidth": 0,
+      "opacity": 0.95
+    },
+    {
+      "id": "lower-facet",
+      "type": "polygon",
+      "points": [[39, 89], [51, 62], [64, 58], [78, 61], [90, 88], [64, 107]],
+      "fill": "#5b9b7f",
+      "stroke": "#3f735f",
+      "strokeWidth": 2
+    },
+    {
+      "id": "spirit-core",
+      "type": "path",
+      "d": "M64 91 C48 82 50 68 61 61 C72 54 78 46 73 35 C88 45 88 61 78 70 C72 76 72 82 79 88 C75 96 68 99 64 91 Z",
+      "fill": "#b8f7df",
+      "stroke": "#e5fff5",
+      "strokeWidth": 3
+    },
+    {
+      "id": "core-cut",
+      "type": "path",
+      "d": "M65 83 C59 77 61 70 67 66 C73 62 75 57 73 52 C80 58 79 68 73 73 C69 76 68 80 71 83 C69 86 67 87 65 83 Z",
+      "fill": "#4cc9a1",
+      "stroke": "none",
+      "strokeWidth": 0
+    },
+    {
+      "id": "highlight",
+      "type": "ellipse",
+      "cx": 50,
+      "cy": 43,
+      "rx": 8,
+      "ry": 14,
+      "fill": "#d8fff0",
+      "stroke": "none",
+      "strokeWidth": 0,
+      "opacity": 0.5,
+      "transform": "rotate(-25 50 43)"
+    }
+  ]
+}
