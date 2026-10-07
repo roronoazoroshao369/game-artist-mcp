@@ -1,0 +1,365 @@
+#!/usr/bin/env node
+import { execFileSync, spawnSync } from "node:child_process";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
+
+import { applyOperations } from "../core/engine.mjs";
+import { renderSvg } from "../core/render-svg.mjs";
+import { validateDocument } from "../core/validate.mjs";
+import { AssetStore } from "./store.mjs";
+
+const PROTOCOL_VERSION = "2025-11-25";
+const SERVER_VERSION = "0.0.2";
+
+function parseWorkspace(argv) {
+  const index = argv.indexOf("--workspace");
+  if (index >= 0) {
+    const value = argv[index + 1];
+    if (!value) throw new Error("--workspace requires a path");
+    return resolve(value);
+  }
+  return resolve(process.cwd(), ".game-artist-workspace");
+}
+
+const workspace = parseWorkspace(process.argv.slice(2));
+const store = new AssetStore(workspace);
+await store.init();
+
+function rendererAvailable() {
+  const result = spawnSync("rsvg-convert", ["--version"], { encoding: "utf8" });
+  return result.status === 0;
+}
+
+async function renderPng(document) {
+  const temp = await mkdtemp(join(tmpdir(), "game-artist-preview-"));
+  try {
+    const svgPath = join(temp, "preview.svg");
+    const pngPath = join(temp, "preview.png");
+    await writeFile(svgPath, renderSvg(document), "utf8");
+    execFileSync("rsvg-convert", ["--format=png", "--output", pngPath, svgPath], {
+      stdio: ["ignore", "ignore", "pipe"]
+    });
+    return await readFile(pngPath);
+  } catch (error) {
+    const detail = error?.stderr?.toString?.().trim();
+    throw new Error(detail ? `PNG render failed: ${detail}` : "PNG render failed; rsvg-convert may be unavailable");
+  } finally {
+    await rm(temp, { recursive: true, force: true });
+  }
+}
+
+function textResult(value, structuredContent = undefined) {
+  return {
+    content: [{ type: "text", text: typeof value === "string" ? value : JSON.stringify(value) }],
+    ...(structuredContent === undefined ? {} : { structuredContent })
+  };
+}
+
+function errorResult(error) {
+  const message = error instanceof Error ? error.message : String(error);
+  return {
+    isError: true,
+    content: [{ type: "text", text: message }]
+  };
+}
+
+const tools = [
+  {
+    name: "health",
+    description: "Return Game Artist MCP health and deterministic renderer readiness.",
+    inputSchema: { type: "object", properties: {}, additionalProperties: false }
+  },
+  {
+    name: "asset_create",
+    description: "Create a new empty explicit vector art document inside the governed workspace.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        asset_id: { type: "string", pattern: "^[a-z0-9][a-z0-9_-]{0,63}$" },
+        width: { type: "number", exclusiveMinimum: 0, maximum: 4096 },
+        height: { type: "number", exclusiveMinimum: 0, maximum: 4096 }
+      },
+      required: ["asset_id", "width", "height"],
+      additionalProperties: false
+    }
+  },
+  {
+    name: "asset_get",
+    description: "Read current revision and explicit document for an asset.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        asset_id: { type: "string" },
+        include_history: { type: "boolean" }
+      },
+      required: ["asset_id"],
+      additionalProperties: false
+    }
+  },
+  {
+    name: "document_query",
+    description: "Read a bounded summary or selected nodes from the current art document.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        asset_id: { type: "string" },
+        ids: { type: "array", maxItems: 64, items: { type: "string" } }
+      },
+      required: ["asset_id"],
+      additionalProperties: false
+    }
+  },
+  {
+    name: "document_apply_ops",
+    description: "Atomically apply a bounded batch of explicit deterministic art operations with optimistic revision checking.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        asset_id: { type: "string" },
+        expected_revision: { type: "integer", minimum: 0 },
+        idempotency_key: { type: "string", maxLength: 128 },
+        operations: {
+          type: "array",
+          minItems: 1,
+          maxItems: 50,
+          items: { type: "object" }
+        }
+      },
+      required: ["asset_id", "expected_revision", "operations"],
+      additionalProperties: false
+    }
+  },
+  {
+    name: "render_preview",
+    description: "Render the current explicit art document to PNG and return it as an MCP image content block.",
+    inputSchema: {
+      type: "object",
+      properties: { asset_id: { type: "string" } },
+      required: ["asset_id"],
+      additionalProperties: false
+    }
+  },
+  {
+    name: "validate_asset",
+    description: "Run deterministic technical validation against the current art document.",
+    inputSchema: {
+      type: "object",
+      properties: { asset_id: { type: "string" } },
+      required: ["asset_id"],
+      additionalProperties: false
+    }
+  },
+  {
+    name: "export_asset",
+    description: "Export the current asset to explicit SVG, PNG and machine-readable report files under the governed workspace.",
+    inputSchema: {
+      type: "object",
+      properties: { asset_id: { type: "string" } },
+      required: ["asset_id"],
+      additionalProperties: false
+    }
+  }
+];
+
+async function callTool(name, args) {
+  switch (name) {
+    case "health":
+      return textResult({
+        ok: true,
+        server: "game-artist-mcp",
+        version: SERVER_VERSION,
+        protocolVersion: PROTOCOL_VERSION,
+        renderer: { rsvg: rendererAvailable() }
+      });
+
+    case "asset_create": {
+      const state = await store.create(args.asset_id, args.width, args.height);
+      return textResult({ asset_id: args.asset_id, revision: state.revision, node_count: 0 });
+    }
+
+    case "asset_get": {
+      const state = await store.load(args.asset_id);
+      const value = {
+        asset_id: args.asset_id,
+        revision: state.revision,
+        document: state.document,
+        ...(args.include_history ? { history: state.history.slice(-100) } : {})
+      };
+      return textResult(value);
+    }
+
+    case "document_query": {
+      const state = await store.load(args.asset_id);
+      const selected = Array.isArray(args.ids)
+        ? state.document.nodes.filter((node) => args.ids.includes(node.id))
+        : state.document.nodes;
+      return textResult({
+        asset_id: args.asset_id,
+        revision: state.revision,
+        canvas: state.document.canvas,
+        total_nodes: state.document.nodes.length,
+        nodes: selected.slice(0, 200)
+      });
+    }
+
+    case "document_apply_ops": {
+      const current = await store.load(args.asset_id);
+      const next = applyOperations(current, {
+        expectedRevision: args.expected_revision,
+        idempotencyKey: args.idempotency_key ?? null,
+        operations: args.operations
+      });
+      await store.save(args.asset_id, next);
+      return textResult({
+        asset_id: args.asset_id,
+        revision: next.revision,
+        node_count: next.document.nodes.length,
+        warnings: validateDocument(next.document).warnings
+      });
+    }
+
+    case "render_preview": {
+      const state = await store.load(args.asset_id);
+      const png = await renderPng(state.document);
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify({
+              asset_id: args.asset_id,
+              revision: state.revision,
+              mime_type: "image/png",
+              bytes: png.byteLength
+            })
+          },
+          { type: "image", data: png.toString("base64"), mimeType: "image/png" }
+        ],
+        structuredContent: {
+          asset_id: args.asset_id,
+          revision: state.revision,
+          mime_type: "image/png",
+          bytes: png.byteLength
+        }
+      };
+    }
+
+    case "validate_asset": {
+      const state = await store.load(args.asset_id);
+      const result = validateDocument(state.document);
+      return textResult({
+        asset_id: args.asset_id,
+        revision: state.revision,
+        ...result
+      });
+    }
+
+    case "export_asset": {
+      const state = await store.load(args.asset_id);
+      const validation = validateDocument(state.document);
+      if (!validation.ok) throw new Error(validation.errors.join("; "));
+
+      const outputDir = join(store.assetDir(args.asset_id), "output");
+      await mkdir(outputDir, { recursive: true, mode: 0o700 });
+      const svg = renderSvg(state.document);
+      const svgPath = join(outputDir, "asset.svg");
+      const pngPath = join(outputDir, "asset.png");
+      const reportPath = join(outputDir, "report.json");
+      await writeFile(svgPath, svg, "utf8");
+      const png = await renderPng(state.document);
+      await writeFile(pngPath, png);
+      const report = {
+        asset_id: args.asset_id,
+        revision: state.revision,
+        node_count: state.document.nodes.length,
+        validation
+      };
+      await writeFile(reportPath, JSON.stringify(report, null, 2) + "\n", "utf8");
+      return textResult({
+        asset_id: args.asset_id,
+        revision: state.revision,
+        files: [
+          `assets/${args.asset_id}/output/asset.svg`,
+          `assets/${args.asset_id}/output/asset.png`,
+          `assets/${args.asset_id}/output/report.json`
+        ]
+      });
+    }
+
+    default:
+      throw new Error(`unknown tool: ${name}`);
+  }
+}
+
+function send(value) {
+  process.stdout.write(JSON.stringify(value) + "\n");
+}
+
+async function handle(message) {
+  if (!message || message.jsonrpc !== "2.0") return;
+
+  if (message.id === undefined) {
+    return;
+  }
+
+  const id = message.id;
+
+  if (message.method === "initialize") {
+    send({
+      jsonrpc: "2.0",
+      id,
+      result: {
+        protocolVersion: message.params?.protocolVersion ?? PROTOCOL_VERSION,
+        capabilities: { tools: {} },
+        serverInfo: { name: "game-artist-mcp", version: SERVER_VERSION }
+      }
+    });
+    return;
+  }
+
+  if (message.method === "ping") {
+    send({ jsonrpc: "2.0", id, result: {} });
+    return;
+  }
+
+  if (message.method === "tools/list") {
+    send({ jsonrpc: "2.0", id, result: { tools } });
+    return;
+  }
+
+  if (message.method === "tools/call") {
+    try {
+      const name = message.params?.name;
+      const args = message.params?.arguments ?? {};
+      const result = await callTool(name, args);
+      send({ jsonrpc: "2.0", id, result });
+    } catch (error) {
+      send({ jsonrpc: "2.0", id, result: errorResult(error) });
+    }
+    return;
+  }
+
+  send({ jsonrpc: "2.0", id, error: { code: -32601, message: "Method not found." } });
+}
+
+let buffer = "";
+let chain = Promise.resolve();
+process.stdin.setEncoding("utf8");
+process.stdin.on("data", (chunk) => {
+  buffer += chunk;
+  for (;;) {
+    const newline = buffer.indexOf("\n");
+    if (newline < 0) break;
+    const line = buffer.slice(0, newline).trim();
+    buffer = buffer.slice(newline + 1);
+    if (!line) continue;
+    chain = chain.then(async () => {
+      try {
+        await handle(JSON.parse(line));
+      } catch {
+        // Malformed input is ignored; stdout remains a clean JSON-RPC channel.
+      }
+    });
+  }
+});
+process.stdin.resume();

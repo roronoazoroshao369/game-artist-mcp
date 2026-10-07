@@ -13,7 +13,10 @@ permissions:
 jobs:
   poc:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
+
+    env:
+      FOLDERFORGE_SHA: 59c1096167a81bef24a07fa88453f5c50e0fe64a
 
     steps:
       - uses: actions/checkout@v4
@@ -30,15 +33,32 @@ jobs:
       - name: Install package metadata
         run: npm install --ignore-scripts
 
-      - name: Run tests
+      - name: Run unit tests
         run: npm test
 
-      - name: Render POC fixture
+      - name: Render POC-001 fixture
         env:
           REQUIRE_PNG: "1"
         run: npm run poc
 
-      - name: Assert generated artifacts
+      - name: Run direct MCP POC-002 smoke
+        run: npm run smoke:mcp
+
+      - name: Build exact FolderForge integration fixture
+        run: |
+          git clone --filter=blob:none --no-checkout https://github.com/roronoazoroshao369/FolderForge.git ../FolderForge
+          cd ../FolderForge
+          git checkout "$FOLDERFORGE_SHA"
+          npm ci --ignore-scripts
+          npm run build
+
+      - name: Validate FolderForge plugin package
+        run: node ../FolderForge/dist/main.js plugin validate "$GITHUB_WORKSPACE" --json
+
+      - name: Start through FolderForge child-MCP client
+        run: node ../FolderForge/dist/main.js plugin test "$GITHUB_WORKSPACE" --call health --args-json '{}' --json
+
+      - name: Assert generated POC-001 artifacts
         run: |
           test -s examples/jade-spirit-stone/generated/jade-spirit-stone.svg
           test -s examples/jade-spirit-stone/generated/jade-spirit-stone.png
