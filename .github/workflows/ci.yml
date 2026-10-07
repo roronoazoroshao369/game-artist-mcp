@@ -44,6 +44,17 @@ jobs:
       - name: Run direct MCP POC-002 smoke
         run: npm run smoke:mcp
 
+      - name: Render POC-003 Spirit Lantern draft
+        run: npm run poc:003
+
+      - name: Assert POC-003 draft evidence
+        run: |
+          test -s examples/spirit-lantern/generated/draft.png
+          test -s examples/spirit-lantern/generated/draft.svg
+          test -s examples/spirit-lantern/generated/technical-report.json
+          test -s examples/spirit-lantern/generated/benchmark.json
+          grep -q '"visualReview": "PENDING"' examples/spirit-lantern/generated/benchmark.json
+
       - name: Build exact FolderForge integration fixture
         run: |
           git clone --filter=blob:none --no-checkout https://github.com/roronoazoroshao369/FolderForge.git ../FolderForge
@@ -68,3 +79,8 @@ jobs:
         with:
           name: poc-001-jade-spirit-stone
           path: examples/jade-spirit-stone/generated/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: poc-003-spirit-lantern-draft
+          path: examples/spirit-lantern/generated/
