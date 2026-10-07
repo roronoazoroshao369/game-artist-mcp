@@ -13,7 +13,7 @@ permissions:
 jobs:
   poc:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4
@@ -30,15 +30,24 @@ jobs:
       - name: Install package metadata
         run: npm install --ignore-scripts
 
-      - name: Run tests
+      - name: Run unit tests
         run: npm test
 
-      - name: Render POC fixture
+      - name: Render POC-001 fixture
         env:
           REQUIRE_PNG: "1"
         run: npm run poc
 
-      - name: Assert generated artifacts
+      - name: Run direct MCP POC-002 smoke
+        run: npm run smoke:mcp
+
+      - name: Validate FolderForge plugin package
+        run: npx -y @musashishao/folderforge@3.0.1 plugin validate . --json
+
+      - name: Start through FolderForge child-MCP client
+        run: npx -y @musashishao/folderforge@3.0.1 plugin test . --call health --args-json '{}' --json
+
+      - name: Assert generated POC-001 artifacts
         run: |
           test -s examples/jade-spirit-stone/generated/jade-spirit-stone.svg
           test -s examples/jade-spirit-stone/generated/jade-spirit-stone.png
