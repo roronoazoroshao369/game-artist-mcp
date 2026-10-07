@@ -78,7 +78,8 @@ try {
     "document_apply_ops",
     "render_preview",
     "validate_asset",
-    "export_asset"
+    "export_asset",
+    "export_godot_cutout"
   ]);
 
   const health = await call(3, "tools/call", { name: "health", arguments: {} });
