@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="256" viewBox="0 0 192 256">
+  <path id="blade_silhouette" d="M95 9 L108 41 L115 65 L113 141 L104 169 L85 169 L77 141 L77 66 L83 40 Z" fill="#4d392f" stroke="#211c1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="blade_left_face" d="M94 17 L94 162 L86 162 L81 141 L81 66 L85 43 Z" fill="#a0785f" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="blade_right_face" d="M96 19 L106 45 L111 65 L109 142 L102 162 L97 164 Z" fill="#4d392f" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="blade_edge_left" d="M94 17 L83 43 L79 66 L79 141 L86 165" fill="none" stroke="#d8c59d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="blade_edge_right" d="M101 34 L112 65 L112 140 L103 166" fill="none" stroke="#b28a62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="blade_central_ridge" d="M95 26 Q98 78 96 158" fill="none" stroke="#d8c59d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="blade_weather_top" d="M80 73 L85 77 L80 83 M110 109 L104 114 L111 118" fill="none" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="blade_weather_bottom" d="M85 128 L91 133 M106 135 L102 137" fill="none" stroke="#b28a62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="rune_spine" d="M95 65 L90 80 L98 93 L90 110 L98 122 L92 140" fill="none" stroke="#438f8d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="rune_light" d="M95 65 L91 80 L98 93 L91 110" fill="none" stroke="#69d7cf" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="rune_spark_a" cx="95" cy="60" rx="2" ry="4" fill="#b9fff4" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="rune_spark_b" cx="95" cy="148" rx="2" ry="4" fill="#69d7cf" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="guard_shadow" d="M88 171 Q65 158 49 160 Q58 176 84 186 L98 178 L111 186 Q135 179 143 161 Q122 162 104 173 Z" fill="#211c1a" stroke="#211c1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="guard_burnished" d="M85 169 Q64 160 55 163 Q69 177 89 181 L98 175 L108 182 Q128 173 138 163 Q121 166 105 174 Z" fill="#725342" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="guard_edge" d="M60 165 Q75 173 89 178 L98 173 L108 179 Q124 170 133 165" fill="none" stroke="#b28a62" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="left_guard_chip" d="M57 165 L69 169 L64 174 Z" fill="#332820" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="right_guard_flare" d="M127 165 L139 160 L133 171 Z" fill="#b28a62" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="guard_mount" d="M88 169 L103 168 L110 184 L96 190 L83 183 Z" fill="#332820" stroke="#211c1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="guard_jade_mount" cx="96" cy="178" rx="8" ry="7" fill="#438f8d" stroke="#b28a62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="guard_jade_light" cx="94" cy="175" rx="2" ry="3" fill="#b9fff4" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="handle_body" d="M89 185 L103 185 L104 225 Q99 231 92 230 L88 226 Z" fill="#4d392f" stroke="#211c1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="handle_inset" d="M93 188 L100 189 L101 225 L94 226 Z" fill="#725342" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="handle_wrap_a" d="M90 191 L103 198 M90 201 L103 208 M90 211 L103 219 M91 221 L100 226" fill="none" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="handle_wrap_light" d="M102 196 L90 201 M103 206 L91 211 M103 216 L92 222" fill="none" stroke="#b28a62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="pommel_socket" d="M89 227 L104 227 L110 235 L96 245 L84 236 Z" fill="#211c1a" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="pommel_face" d="M89 233 L103 233 L105 237 L96 242 L88 237 Z" fill="#438f8d" stroke="#b28a62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="pommel_spark" cx="96" cy="236" rx="2" ry="3" fill="#69d7cf" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="red_cord" d="M104 225 Q117 229 114 238 L121 241" fill="none" stroke="#8c332e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="red_tassel" d="M119 240 L128 246 L119 249 L114 253 L116 244 Z" fill="#8c332e" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="red_silk_detail" d="M121 244 L118 251" fill="none" stroke="#b28a62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="steel_lower_glint" d="M87 114 L88 140 M105 123 L104 145" fill="none" stroke="#b28a62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="jade_circle_a" cx="95" cy="91" rx="3" ry="3" fill="#b9fff4" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="jade_circle_b" cx="95" cy="121" rx="2" ry="3" fill="#69d7cf" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="hilt_red_seal" d="M92 187 L101 189 L99 196 L90 194 Z" fill="#8c332e" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="guard_bright_rim" d="M55 164 Q67 170 76 174 M113 175 Q125 169 139 161" fill="none" stroke="#d8c59d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+</svg>

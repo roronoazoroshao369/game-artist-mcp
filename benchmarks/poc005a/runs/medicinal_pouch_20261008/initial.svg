@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="256" viewBox="0 0 192 256">
+  <path id="rear_shadow" d="M62 105 Q42 124 45 165 Q34 205 65 227 Q92 246 126 227 Q161 202 147 162 Q144 121 128 106 Z" fill="#211c1a" stroke="#211c1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="bag_body" d="M66 108 Q52 126 53 161 Q45 197 64 216 Q84 232 105 229 Q139 224 142 193 Q145 145 126 108 Z" fill="#a0785f" stroke="#211c1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="left_cloth_shadow" d="M66 109 Q52 133 54 169 L57 205 Q68 225 84 227 Q73 194 73 171 Q71 128 83 110 Z" fill="#725342" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="right_fold" d="M120 114 Q143 143 138 187 Q133 214 114 224 L126 220 Q144 202 142 173 Q142 135 128 108 Z" fill="#4d392f" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="bottom_fold" d="M61 211 Q93 237 136 210 Q121 229 100 231 Q73 231 61 211 Z" fill="#725342" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="right_seam" d="M128 129 Q136 175 128 205" fill="none" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="left_seam" d="M64 131 Q56 166 66 209" fill="none" stroke="#b28a62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="stitched_hem" d="M69 217 Q101 232 129 214" fill="none" stroke="#d8c59d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="neck_dark" d="M63 102 Q95 88 131 101 L126 119 Q94 130 65 119 Z" fill="#211c1a" stroke="#211c1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="pouch_neck" d="M62 104 Q91 94 132 103 L126 119 Q99 125 65 119 Z" fill="#725342" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="pouch_lip" d="M69 103 Q97 96 125 104" fill="none" stroke="#d8c59d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="top_opening" d="M70 102 Q96 90 126 103 Q103 113 70 102 Z" fill="#332820" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="herb_stem_center" d="M97 100 Q88 74 99 40" fill="none" stroke="#183838" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="herb_stem_left" d="M83 105 Q60 85 64 56" fill="none" stroke="#183838" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="herb_stem_right" d="M110 101 Q132 81 128 53" fill="none" stroke="#183838" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="herb_left_leaf" d="M70 85 Q45 73 50 53 Q73 55 77 80 Z" fill="#438f8d" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="herb_center_leaf" d="M98 72 Q83 49 97 30 Q111 46 101 71 Z" fill="#438f8d" stroke="#183838" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="herb_right_leaf" d="M117 82 Q143 72 144 50 Q123 52 113 78 Z" fill="#438f8d" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="leaf_veins" d="M69 77 L54 59 M99 64 L97 40 M121 75 L136 59" fill="none" stroke="#69d7cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="dry_stem" d="M77 101 Q73 83 79 70 M114 103 Q118 87 115 74" fill="none" stroke="#b28a62" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="cord_tie" d="M62 120 Q92 128 127 120 M63 127 Q97 134 129 125" fill="none" stroke="#332820" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="cord_light" d="M63 119 Q94 126 128 119" fill="none" stroke="#b28a62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="cord_knot_left" d="M93 124 Q74 106 71 123 Q81 137 94 129 Z" fill="#725342" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="cord_knot_right" d="M100 125 Q115 108 121 123 Q115 139 101 129 Z" fill="#725342" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="jade_button" cx="97" cy="126" rx="7" ry="7" fill="#438f8d" stroke="#d8c59d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="jade_button_glint" cx="95" cy="123" rx="2" ry="2" fill="#b9fff4" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="front_seal" d="M84 157 L111 151 L113 195 L87 203 Z" fill="#d8c59d" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="front_seal_shadow" d="M90 165 L105 161 L106 188 L91 192 Z" fill="#725342" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="seal_mark" d="M98 163 L99 190 M92 178 L105 176" fill="none" stroke="#8c332e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="side_patch" d="M52 153 L68 144 L76 165 L62 173 Z" fill="#8c332e" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="patch_stitches" d="M57 154 L65 150 M60 167 L71 161" fill="none" stroke="#d8c59d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="fabric_fray" d="M76 230 L73 236 M86 230 L85 235 M114 228 L118 233" fill="none" stroke="#332820" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+</svg>

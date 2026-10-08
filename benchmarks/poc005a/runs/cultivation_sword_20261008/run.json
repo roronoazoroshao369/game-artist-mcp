@@ -1,0 +1,16 @@
+{
+  "runId": "cultivation_sword_20261008",
+  "projectSha": "d2958b9d85c3925ee46304f06f1aed39613a251b",
+  "serverVersion": "0.0.3",
+  "profileId": "dark-cultivation-v1",
+  "profileVersion": 1,
+  "rendererVersion": "rsvg-convert version 2.58.0",
+  "briefSha256": "5920ae3daa50bb44647eb0a13f7fd9dc1b929229fc2061eff38ec31b95626ca8",
+  "toolCalls": 9,
+  "operationCount": 44,
+  "renderCount": 2,
+  "correctionRounds": 1,
+  "elapsedMs": 266791,
+  "outcome": "AGENT_PROVENANCE_PENDING",
+  "agentProvenance": "UNKNOWN"
+}

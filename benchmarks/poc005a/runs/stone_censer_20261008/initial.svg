@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="256" viewBox="0 0 192 256">
+  <path id="smoke_halo" d="M97 96 C73 76 120 67 105 44 C95 30 90 26 108 11" fill="none" stroke="#438f8d" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity="0.32" />
+  <path id="smoke_core" d="M97 93 C80 74 112 68 101 49 C94 38 92 26 108 17" fill="none" stroke="#69d7cf" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.9" />
+  <path id="smoke_second" d="M97 65 Q76 56 80 42 Q83 34 90 29" fill="none" stroke="#438f8d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.65" />
+  <path id="rear_leg" d="M91 183 L107 184 L111 226 L101 238 L89 226 Z" fill="#332820" stroke="#211c1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="rear_leg_glint" d="M99 196 L103 220" fill="none" stroke="#725342" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="left_leg" d="M53 174 L76 180 L70 211 L64 237 L44 230 L48 206 Z" fill="#4d392f" stroke="#211c1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="left_leg_face" d="M56 189 L66 194 L60 225 L52 226 Z" fill="#725342" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="right_leg" d="M119 182 L144 176 L148 206 L144 230 L125 236 L116 210 Z" fill="#4d392f" stroke="#211c1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="right_leg_face" d="M128 191 L141 189 L140 223 L133 228 Z" fill="#725342" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="left_handle_loop" d="M49 149 C29 141 25 165 33 179 Q42 190 53 180" fill="none" stroke="#211c1a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="left_handle_light" d="M45 151 Q29 147 32 169" fill="none" stroke="#b28a62" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="right_handle_loop" d="M143 149 C163 140 168 158 162 178 Q153 189 143 179" fill="none" stroke="#211c1a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="right_handle_rim" d="M150 152 Q166 153 160 173" fill="none" stroke="#725342" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="base_shadow" d="M45 151 Q96 133 149 152 L143 186 Q128 210 99 213 Q66 212 50 189 Z" fill="#211c1a" stroke="#211c1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="stone_bowl" d="M46 153 Q99 142 147 152 L141 185 Q124 207 99 208 Q73 209 54 190 Z" fill="#4d392f" stroke="#211c1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="bowl_left_plane" d="M51 158 Q57 184 75 196 L89 204 Q61 204 54 188 Z" fill="#725342" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="bowl_right_plane" d="M135 157 Q141 178 134 189 Q123 201 115 204 L130 196 Z" fill="#332820" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="bowl_lower_rim" d="M59 190 Q96 212 137 190" fill="none" stroke="#b28a62" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="bowl_chip" d="M55 172 L63 175 L59 180 L52 177 Z" fill="#332820" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="bowl_carving_lower" d="M72 178 Q95 195 119 178" fill="none" stroke="#332820" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="bowl_chipped_corner" d="M139 163 L145 159 L142 171 Z" fill="#725342" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="lid_shadow" d="M53 147 Q58 112 79 102 L90 97 L95 87 L102 99 Q133 106 143 145 Z" fill="#211c1a" stroke="#211c1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="lid_stone" d="M56 145 Q61 115 82 105 L97 94 Q126 108 140 143 Z" fill="#725342" stroke="#211c1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="lid_left_facet" d="M58 145 Q67 114 91 101 L95 95 L92 141 Z" fill="#a0785f" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="lid_right_facet" d="M100 100 Q126 107 138 141 L108 141 Z" fill="#4d392f" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="lid_lower_band" d="M52 144 Q98 133 144 144 L143 155 Q94 169 50 154 Z" fill="#332820" stroke="#211c1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="lid_band_light" d="M56 147 Q95 138 140 146" fill="none" stroke="#b28a62" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="lid_vent_left" cx="75" cy="136" rx="6" ry="4" fill="#183838" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="lid_vent_right" cx="120" cy="137" rx="6" ry="4" fill="#183838" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="upper_stone_crack" d="M86 108 L84 116 L90 124 L87 135" fill="none" stroke="#332820" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="right_stone_crack" d="M116 115 L113 123 L121 128" fill="none" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="knob_socket" d="M88 94 L94 83 L105 88 L110 99 L96 104 Z" fill="#332820" stroke="#211c1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="jade_finial" cx="97" cy="92" rx="6" ry="8" fill="#438f8d" stroke="#b28a62" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="jade_finial_spec" cx="95" cy="89" rx="2" ry="3" fill="#b9fff4" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="center_emblem_mount" d="M84 165 Q96 155 109 164 L107 181 Q96 191 85 182 Z" fill="#332820" stroke="#b28a62" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="center_emblem" d="M96 163 L104 173 L97 183 L88 173 Z" fill="#438f8d" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="center_emblem_cut" d="M95 168 L95 179" fill="none" stroke="#69d7cf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="lid_chisel_scratches" d="M63 126 L69 119 M122 112 L128 121 M82 155 L93 153" fill="none" stroke="#b28a62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+</svg>

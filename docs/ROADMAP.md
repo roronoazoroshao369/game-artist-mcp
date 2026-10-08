@@ -198,4 +198,10 @@ Redesign or stop a modality if:
 
 ## POC-005A — trusted artistic benchmark substrate
 
+**2026-10-08 local experiment status:** three local MCP interactive trials exist under `benchmarks/poc005a/runs/` (cultivation sword, medicinal pouch, stone incense burner). Each has a genuine initial PNG returned by the server, an image-informed same-asset correction and a revised PNG. Local evidence was machine-audited; Art IR and style checks pass. The feedback remains SELF_REVIEW. Provider-side agent-authorship proof and a third-party reviewer at 64px/128px are NOT available. Outcome remains `AGENT_PROVENANCE_PENDING`, not artistic PASS.
+
+The next decision is to obtain independently verifiable agent-host provenance and repeat/attest the trials, then grade art quality. If the quality gate fails, move to POC-005B *as a redesign based on measured errors*, not an assumed success.
+
+## Earlier POC-005A delivery note
+
 The existing style profile/read-only MCP contract is supplemented with safe benchmark auditing and a runbook. Synthetic CI is STRUCTURAL ONLY. Three genuine agent-origin props, real image-based correction rounds, verified provider provenance and independent 64px/128px review remain the artistic full-pass gate. FolderForge host availability is a dependency, not an excuse to fabricate art success. POC-005B quality and atlas work will be selected from actual results.

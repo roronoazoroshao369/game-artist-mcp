@@ -51,20 +51,14 @@ See:
 
 ## Current state
 
-POC-001 already proves:
+- POC-001/002: deterministic vector art engine and 11-tool stdio MCP with FolderForge integration.
+- POC-003: render → image inspection → targeted edit loop (mechanics only).
+- POC-004: Spirit Lantern cutout/Godot exporter and headless runtime verification.
+- POC-005A: ArtStyleProfile, safe structural evidence auditor, and three **agent-directed local MCP** trials (cultivation sword, medicinal pouch, stone censer) under [benchmarks/poc005a/runs](benchmarks/poc005a/runs). Each preserves two actual PNG renders and a correction on the same asset. Their local structural audit is included in `npm test`.
 
-```text
-structured art document
-→ typed deterministic operations
-→ SVG render
-→ PNG rasterization
-→ validation
-→ reproducible output
-```
+**Evidence boundary:** The three live sessions were executed through a local stdio MCP transport, not an independently audited provider-origin agent host. Their image critique is SELF_REVIEW. The repository therefore retains `AGENT_PROVENANCE_PENDING` and **does not claim artistic FULL_PASS, independent aesthetics approval or production art quality**. See [POC-005A benchmark protocol](benchmarks/poc005a/README.md).
 
-POC-002 adds a real MCP server and FolderForge child-plugin package with a compact art-specific tool surface.
-
-This is still a proof of mechanism, **not proof of production artistic quality**.
+The first next gate is external agent-authorship attestation and independent 64px/128px review of these and fresh held-out results. Artistic weaknesses should drive POC-005B redesign before widening scope.
 
 ## Local development
 

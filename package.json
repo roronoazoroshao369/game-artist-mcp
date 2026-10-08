@@ -3,9 +3,7 @@
   "version": "0.0.3",
   "private": true,
   "type": "module",
-  "engines": {
-    "node": ">=22"
-  },
+  "engines": { "node": ">=22" },
   "scripts": {
     "test": "node --test",
     "poc": "node scripts/run-poc.mjs",
@@ -14,6 +12,7 @@
     "check": "npm test && npm run poc && npm run smoke:mcp && npm run poc:003 && npm run poc:004",
     "poc:003": "node scripts/poc003-spirit-lantern.mjs",
     "poc:004": "node scripts/poc004-godot.mjs",
-    "audit:poc005a": "node --test test/benchmark-evidence.test.mjs"
+    "audit:poc005a": "node --test test/benchmark-evidence.test.mjs",
+    "benchmark:live": "node scripts/live-benchmark-call.mjs"
   }
 }

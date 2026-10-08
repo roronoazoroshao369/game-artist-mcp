@@ -2,6 +2,18 @@
 
 This benchmark tests whether an actual vision-capable agent can design **original** editable art through the deterministic Game Artist MCP. Structural CI can never prove agent authorship or aesthetic quality.
 
+## Local agent-directed MCP benchmark (technical evidence, not provider provenance)
+
+A bounded one-call-at-a-time JSON-RPC client is available via `npm run benchmark:live`. For each invocation, write one JSON request to the ignored `.game-artist/live-request.json`, for example:
+
+```json
+{"runId":"new_prop_001","tool":"style_profile_get","arguments":{"profile_id":"dark-cultivation-v1"}}
+```
+
+Then run `npm run benchmark:live`. Invoke `asset_create` with `asset_id=runId`, manually compose `document_apply_ops` geometry, and call `render_preview` with top-level `phase:"initial"` or `phase:"revised"`. The runner preserves the actual server replies, preview PNG bytes and deterministic SVG under `benchmarks/poc005a/runs/<runId>/`. Provide `brief.md` and a concrete pixel-inspection `critique.md`; finishing with `validate_asset`, `style_validate` and `export_asset` emits `run.json` and `technical-report.json`. The request file is ignored; committed runs intentionally retain real geometry operations in the transcript.
+
+The three 2026-10-08 samples are LOCAL STDIO MCP evidence only, without secure provider-authored trace. The local auditor tests structure, NEVER independent authorship or aesthetic acceptance. A genuine external vision-capable host must still independently complete fresh held-out trials and external visual review before artistic FULL_PASS.
+
 ## Host setup and eligibility
 
 Use FolderForge as the preferred governed host, or any compatible writable MCP client, with access to asset_create, document_apply_ops, render_preview, style_validate, export_asset and **the returned image/png pixels**. Verify tool calls and image visibility before starting. If the host is inaccessible, explicitly record **BLOCKED: HOST_ACCESS**; do not invent artifacts.
