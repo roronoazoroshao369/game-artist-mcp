@@ -192,6 +192,33 @@ try {
   assert.equal(checked.revision, 1);
   assert.equal(checked.ok, false); // existing smoke colors deliberately differ
 
+
+  const styleAsset = await call(14, "tools/call", {
+    name: "asset_create", arguments: { asset_id: "style_smoke", width: 64, height: 64 }
+  });
+  assert.equal(styleAsset.result.isError, undefined);
+  const styledEdit = await call(15, "tools/call", {
+    name: "document_apply_ops",
+    arguments: { asset_id: "style_smoke", expected_revision: 0,
+      operations: [{ type: "node.add", node: { id: "styled", type: "ellipse",
+        cx: 32, cy: 32, rx: 10, ry: 16,
+        fill: profile.profile.palette.allowedHex[0], stroke: profile.profile.palette.allowedHex[1],
+        strokeWidth: profile.profile.stroke.allowedWidths[0] } }]
+    }
+  });
+  assert.equal(styledEdit.result.isError, undefined);
+  const styledCheck = await call(16, "tools/call", {
+    name: "style_validate", arguments: { asset_id: "style_smoke", profile_id: "dark-cultivation-v1" }
+  });
+  assert.equal(styledCheck.result.isError, undefined);
+  const styledReport = JSON.parse(styledCheck.result.content[0].text);
+  assert.equal(styledReport.revision, 1);
+  assert.equal(styledReport.ok, true, JSON.stringify(styledReport));
+  const styleReadback = await call(17, "tools/call", {
+    name: "asset_get", arguments: { asset_id: "style_smoke" }
+  });
+  assert.equal(JSON.parse(styleReadback.result.content[0].text).revision, 1);
+
   const missingProfile = await call(12, "tools/call", {
     name: "style_profile_get", arguments: { profile_id: "../secret" }
   });
