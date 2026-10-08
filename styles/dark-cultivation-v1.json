@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "id": "dark-cultivation-v1",
+  "name": "Dark Cultivation",
+  "palette": {
+    "allowedHex": [
+      "#211c1a",
+      "#332820",
+      "#4d392f",
+      "#725342",
+      "#8c6650",
+      "#a0785f",
+      "#b28a62",
+      "#438f8d",
+      "#69d7cf",
+      "#72f5ec",
+      "#b9fff4",
+      "#d8c59d",
+      "#8c332e",
+      "#983f35",
+      "#d6c29a",
+      "#3d302b",
+      "#183838",
+      "#eafffb",
+      "#2a211e",
+      "#7f312f",
+      "#5f9f80",
+      "#18231f"
+    ],
+    "maxDistinctColors": 12
+  },
+  "stroke": {
+    "minWidth": 1,
+    "maxWidth": 12,
+    "allowedWidths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ]
+  },
+  "complexity": {
+    "maxNodes": 200
+  }
+}

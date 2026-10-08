@@ -194,3 +194,8 @@ Redesign or stop a modality if:
 - the agent cannot reliably self-correct visible errors;
 - style consistency remains poor across a 10-asset benchmark;
 - Godot packages remain brittle despite deterministic technical validation.
+
+
+## POC-005A — trusted artistic benchmark substrate
+
+The existing style profile/read-only MCP contract is supplemented with safe benchmark auditing and a runbook. Synthetic CI is STRUCTURAL ONLY. Three genuine agent-origin props, real image-based correction rounds, verified provider provenance and independent 64px/128px review remain the artistic full-pass gate. FolderForge host availability is a dependency, not an excuse to fabricate art success. POC-005B quality and atlas work will be selected from actual results.

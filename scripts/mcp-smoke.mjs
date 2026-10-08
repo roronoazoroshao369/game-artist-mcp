@@ -79,7 +79,9 @@ try {
     "render_preview",
     "validate_asset",
     "export_asset",
-    "export_godot_cutout"
+    "export_godot_cutout",
+    "style_profile_get",
+    "style_validate"
   ]);
 
   const health = await call(3, "tools/call", { name: "health", arguments: {} });
@@ -171,6 +173,67 @@ try {
   );
   assert.equal(state.revision, 1);
   assert.equal(state.document.nodes.length, 2);
+
+  const profileGet = await call(10, "tools/call", {
+    name: "style_profile_get",
+    arguments: { profile_id: "dark-cultivation-v1" }
+  });
+  assert.equal(profileGet.result.isError, undefined);
+  const profile = JSON.parse(profileGet.result.content[0].text);
+  assert.equal(profile.profile.id, "dark-cultivation-v1");
+  assert.equal(profile.version, 1);
+
+  const styleCheck = await call(11, "tools/call", {
+    name: "style_validate",
+    arguments: { asset_id: "smoke_stone", profile_id: "dark-cultivation-v1" }
+  });
+  assert.equal(styleCheck.result.isError, undefined);
+  const checked = JSON.parse(styleCheck.result.content[0].text);
+  assert.equal(checked.revision, 1);
+  assert.equal(checked.ok, false); // existing smoke colors deliberately differ
+
+
+  const styleAsset = await call(14, "tools/call", {
+    name: "asset_create", arguments: { asset_id: "style_smoke", width: 64, height: 64 }
+  });
+  assert.equal(styleAsset.result.isError, undefined);
+  const styledEdit = await call(15, "tools/call", {
+    name: "document_apply_ops",
+    arguments: { asset_id: "style_smoke", expected_revision: 0,
+      operations: [{ type: "node.add", node: { id: "styled", type: "ellipse",
+        cx: 32, cy: 32, rx: 10, ry: 16,
+        fill: profile.profile.palette.allowedHex[0], stroke: profile.profile.palette.allowedHex[1],
+        strokeWidth: profile.profile.stroke.allowedWidths[0] } }]
+    }
+  });
+  assert.equal(styledEdit.result.isError, undefined);
+  const styledCheck = await call(16, "tools/call", {
+    name: "style_validate", arguments: { asset_id: "style_smoke", profile_id: "dark-cultivation-v1" }
+  });
+  assert.equal(styledCheck.result.isError, undefined);
+  const styledReport = JSON.parse(styledCheck.result.content[0].text);
+  assert.equal(styledReport.revision, 1);
+  assert.equal(styledReport.ok, true, JSON.stringify(styledReport));
+  const styleReadback = await call(17, "tools/call", {
+    name: "asset_get", arguments: { asset_id: "style_smoke" }
+  });
+  assert.equal(JSON.parse(styleReadback.result.content[0].text).revision, 1);
+
+  const missingProfile = await call(12, "tools/call", {
+    name: "style_profile_get", arguments: { profile_id: "../secret" }
+  });
+  assert.equal(missingProfile.result.isError, true);
+  assert.match(missingProfile.result.content[0].text, /unknown style profile/);
+
+  const missingAsset = await call(13, "tools/call", {
+    name: "style_validate", arguments: { asset_id: "missing", profile_id: "dark-cultivation-v1" }
+  });
+  assert.equal(missingAsset.result.isError, true);
+
+  const stateAfterStyle = JSON.parse(
+    await readFile(join(workspace, "assets", "smoke_stone", "state.json"), "utf8")
+  );
+  assert.deepEqual(stateAfterStyle, state);
 
   console.log(JSON.stringify({
     ok: true,
