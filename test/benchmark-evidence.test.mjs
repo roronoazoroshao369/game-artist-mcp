@@ -98,3 +98,10 @@ test('bad bundles produce a nonzero CLI exit code',async()=>{
   assert.notEqual(cli.status,0);
  }finally{await rm(dir,{recursive:true,force:true});}
 });
+
+test('refuses leaked host credentials inside transcript arguments or results', async()=>{
+ await checkBad(dir=>modifyEvents(dir,e=>{e[0].arguments.authorization='Bearer sk-example-host-secret';}),/secret|credential|sensitive/i);
+});
+test('refuses oversized individual media files, even with valid PNG header',async()=>{
+ await checkBad(dir=>writeFile(join(dir,'revised.png'),Buffer.concat([png,Buffer.alloc(8*1024*1024)])),/size|limit|large/i);
+});
