@@ -14,7 +14,7 @@ import {loadStyleProfile} from '../src/style/profile.mjs';
 const root=resolve('benchmarks/poc005b/generated/heldout-compass');
 const review=join(root,'review'),internal=join(root,'internal');
 await mkdir(review,{recursive:true});await mkdir(internal,{recursive:true});
-const {baseline,enhanced,appearanceNodes,runId}=await loadHeldoutCompassPair();
+const {baseline,enhanced,appearanceNodes,runId,sourceRevision}=await loadHeldoutCompassPair();
 assertSameGeometryPair(baseline,enhanced);
 const profile=await loadStyleProfile('dark-cultivation-v1');
 for(const d of [baseline,enhanced]){
@@ -45,7 +45,7 @@ for(const n of [64,128]){
  if(!a||!b||a.sha256===b.sha256)throw new Error('A/B must have distinguishable pixels at '+n);
 }
 const metadata={kind:'SELF_SELECTED_LOCAL_MCP_UNSCORED_APPEARANCE_ONLY',
- asset:runId,sourceRevision:2,sourceNodes:28,appearanceNodes,
+ asset:runId,sourceRevision,sourceNodes:28,appearanceNodes,
  geometryEqual:true,reviewerStatus:'VISUAL_REVIEW_PENDING',
  agentProvenance:'UNKNOWN',independentReviewerCount:0,
  independentHeldout:false,briefSelection:'SELF_SELECTED_BY_ART_AUTHOR',qualifiesForAutonomyGo:false,
