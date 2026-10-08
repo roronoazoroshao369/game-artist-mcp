@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="256" viewBox="0 0 192 256">
+  <path id="rear_cord" d="M124 171 Q155 177 152 197 Q151 211 140 226" fill="none" stroke="#8c332e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="suspension_loop" d="M78 51 Q69 27 84 20 Q105 13 116 28 Q123 39 111 53" fill="none" stroke="#211c1a" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="suspension_loop_metal" d="M78 51 Q69 27 84 20 Q105 13 116 28 Q123 39 111 53" fill="none" stroke="#b28a62" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="shadow_disc" cx="96" cy="116" rx="77" ry="79" fill="#211c1a" stroke="#211c1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="bronze_frame" cx="96" cy="113" rx="73" ry="75" fill="#725342" stroke="#211c1a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="outer_bronze_plane" d="M35 79 Q50 50 81 43 Q48 59 43 88 Q29 121 46 154 Q61 182 89 183 Q52 181 37 156 Q13 115 35 79 Z" fill="#b28a62" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="right_bezel_shadow" d="M147 67 Q169 97 166 132 Q159 169 131 181 Q158 168 170 144 Q182 101 147 67 Z" fill="#332820" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="dark_ring_liner" cx="96" cy="113" rx="61" ry="63" fill="#211c1a" stroke="#b28a62" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="dial_stone" cx="95" cy="113" rx="54" ry="56" fill="#4d392f" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="dial_shaded_plane" d="M57 87 Q74 63 106 62 Q73 78 70 113 Q70 148 107 166 Q76 162 61 140 Q43 114 57 87 Z" fill="#725342" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="dial_quadrant" d="M105 66 Q137 68 148 103 Q143 93 132 88 L111 119 L101 116 Z" fill="#332820" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="compass_tick_n" d="M94 54 L94 69" fill="none" stroke="#d8c59d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="compass_tick_s" d="M98 159 L98 174" fill="none" stroke="#b28a62" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="compass_tick_w" d="M43 111 L57 111" fill="none" stroke="#b28a62" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="compass_tick_e" d="M136 113 L149 113" fill="none" stroke="#d8c59d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="copper_diagonal_marks" d="M56 75 L66 85 M131 77 L123 86 M60 148 L70 139 M128 143 L137 153" fill="none" stroke="#a0785f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="stone_crack_a" d="M68 89 L78 101 L73 111 L81 122" fill="none" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="stone_crack_b" d="M123 125 L131 130 L128 142" fill="none" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="needle_lower" d="M96 119 L91 151 L105 163 L105 126 Z" fill="#183838" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="needle_top" d="M97 124 L89 112 L110 69 L109 117 Z" fill="#438f8d" stroke="#211c1a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="needle_glint" d="M102 103 L107 85 L105 116" fill="none" stroke="#69d7cf" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="needle_pivot" cx="99" cy="119" rx="8" ry="8" fill="#b28a62" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <ellipse id="needle_pivot_core" cx="99" cy="119" rx="3" ry="3" fill="#b9fff4" stroke="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="frame_chip" d="M155 149 L170 142 L164 158 L154 161 Z" fill="#332820" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="socket_lower" d="M84 184 L108 184 L107 193 L88 193 Z" fill="#332820" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="red_cord" d="M98 193 Q93 211 105 223 L96 229" fill="none" stroke="#8c332e" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="tassel_knot" d="M91 224 Q99 219 109 226 L106 234 L91 234 Z" fill="#8c332e" stroke="#211c1a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+  <path id="tassel_fringe" d="M93 230 L90 249 L97 244 L102 252 L106 243 L113 246 L107 230 Z" fill="#8c332e" stroke="#211c1a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="1" />
+</svg>

@@ -1,0 +1,46 @@
+{
+  "profileId": "dark-cultivation-v1",
+  "revision": 2,
+  "artIr": {
+    "asset_id": "astral_compass_trial_20261008",
+    "revision": 2,
+    "ok": true,
+    "errors": [],
+    "warnings": []
+  },
+  "style": {
+    "asset_id": "astral_compass_trial_20261008",
+    "revision": 2,
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "profileId": "dark-cultivation-v1",
+    "metrics": {
+      "nodeCount": 28,
+      "distinctColors": 12,
+      "observedColors": [
+        "#183838",
+        "#211c1a",
+        "#332820",
+        "#438f8d",
+        "#4d392f",
+        "#69d7cf",
+        "#725342",
+        "#8c332e",
+        "#a0785f",
+        "#b28a62",
+        "#b9fff4",
+        "#d8c59d"
+      ],
+      "outOfPaletteColors": [],
+      "missingStrokeWidthIds": [],
+      "invalidStrokeWidthIds": [],
+      "appearance": {
+        "marks": 9,
+        "gradients": 6,
+        "glows": 1
+      }
+    }
+  },
+  "reviewerStatus": "SELF_REVIEW"
+}

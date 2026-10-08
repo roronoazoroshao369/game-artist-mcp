@@ -74,6 +74,9 @@ jobs:
       - name: Render POC-005B 3 real-geometry blinded A/B pairs (technical only)
         run: npm run poc:005b:real
 
+      - name: Render held-out compass same-geometry 64/128 blind A/B (UNSCORED)
+        run: npm run poc:005b:heldout
+
       - name: Generate POC-004 Godot cutout project
         run: npm run poc:004
 
@@ -128,6 +131,12 @@ jobs:
         with:
           name: poc-005b-real-assets-blind-review-UNSCORED
           path: benchmarks/poc005b/generated/real-asset-ab/review/
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: poc-005b-heldout-compass-UNSCORED
+          path: benchmarks/poc005b/generated/heldout-compass/review/
           if-no-files-found: error
 
       - uses: actions/upload-artifact@v4
