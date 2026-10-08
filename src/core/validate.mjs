@@ -1,3 +1,5 @@
+import { validateAppearance } from "./appearance.mjs";
+
 const NODE_TYPES = new Set(["path", "ellipse", "polygon"]);
 
 function finite(value) {
@@ -25,6 +27,7 @@ export function validateDocument(document) {
   }
 
   const ids = new Set();
+  const counts={marks:0,gradients:0,glows:0};
   for (const node of nodes) {
     if (!node || typeof node.id !== "string" || node.id.length === 0) {
       errors.push("every node must have a non-empty string id");
@@ -34,6 +37,9 @@ export function validateDocument(document) {
     ids.add(node.id);
 
     if (!NODE_TYPES.has(node.type)) errors.push(`unsupported node type for ${node.id}: ${node.type}`);
+    const appearance=validateAppearance(node,canvas);
+    errors.push(...appearance.errors.map(e=>`node ${node.id}: ${e}`));
+    for(const key of Object.keys(counts))counts[key]+=appearance.metrics[key];
     if (node.opacity !== undefined && (!finite(node.opacity) || node.opacity < 0 || node.opacity > 1)) {
       errors.push(`opacity for ${node.id} must be between 0 and 1`);
     }
@@ -64,6 +70,9 @@ export function validateDocument(document) {
     }
   }
 
+  if(counts.marks>128)errors.push("appearance document mark budget exceeded");
+  if(counts.gradients>64)errors.push("appearance document gradient budget exceeded");
+  if(counts.glows>32)errors.push("appearance document glow budget exceeded");
   if (nodes.length > 200) warnings.push("POC complexity budget exceeded: more than 200 nodes");
 
   return { ok: errors.length === 0, errors, warnings };

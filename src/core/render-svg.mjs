@@ -1,4 +1,5 @@
 import { validateDocument } from "./validate.mjs";
+import {renderStyledDocument} from "./render-appearance.mjs";
 
 function esc(value) {
   return String(value)
@@ -43,6 +44,8 @@ export function renderSvg(document) {
   if (!validation.ok) {
     throw new Error(`invalid art document: ${validation.errors.join("; ")}`);
   }
+
+  if(document.nodes.some(node=>node.appearance!==undefined))return renderStyledDocument(document);
 
   const { width, height } = document.canvas;
   const body = document.nodes.map(renderNode).join("\n");

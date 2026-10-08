@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   poc:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
 
     env:
@@ -34,6 +34,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y librsvg2-bin
+          rsvg-convert --version
+          test "$(rsvg-convert --version)" = "rsvg-convert version 2.58.0"
 
       - name: Install package metadata
         run: npm install --ignore-scripts
@@ -65,6 +67,9 @@ jobs:
           test -s examples/spirit-lantern/generated/technical-report-corrected.json
           test -s examples/spirit-lantern/generated/benchmark.json
           grep -q '"visualReview": "PASSED_VISUAL_LOOP"' examples/spirit-lantern/generated/benchmark.json
+
+      - name: Render POC-005B technical material A/B (not artistic evidence)
+        run: npm run poc:005b
 
       - name: Generate POC-004 Godot cutout project
         run: npm run poc:004
@@ -105,6 +110,11 @@ jobs:
           test -s examples/jade-spirit-stone/generated/jade-spirit-stone.svg
           test -s examples/jade-spirit-stone/generated/jade-spirit-stone.png
           test -s examples/jade-spirit-stone/generated/report.json
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: poc-005b-technical-ab
+          path: benchmarks/poc005b/generated/
 
       - uses: actions/upload-artifact@v4
         with:
