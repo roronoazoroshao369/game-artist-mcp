@@ -10,6 +10,7 @@ After the `ci` workflow succeeds on a `main` push, the cleanup action examines c
 A non-protected branch may be deleted only when:
 
 - Its exact commit SHA equals the current `main` SHA; or
+- Its commit is a verified ancestor of `main` (zero commits exclusive to the branch); or
 - A same-repository PR merged to `main`, with its recorded final head SHA matching the branch's current SHA.
 
 Cleanup never deletes `main`, protected branches, branches with open PRs, or branch heads that changed after an earlier merge.
