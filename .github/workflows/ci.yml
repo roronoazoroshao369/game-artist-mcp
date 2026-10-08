@@ -71,6 +71,9 @@ jobs:
       - name: Render POC-005B technical material A/B (not artistic evidence)
         run: npm run poc:005b
 
+      - name: Render POC-005B 3 real-geometry blinded A/B pairs (technical only)
+        run: npm run poc:005b:real
+
       - name: Generate POC-004 Godot cutout project
         run: npm run poc:004
 
@@ -114,7 +117,18 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: poc-005b-technical-ab
-          path: benchmarks/poc005b/generated/
+          path: |
+            benchmarks/poc005b/generated/A*
+            benchmarks/poc005b/generated/B*
+            benchmarks/poc005b/generated/review.html
+            benchmarks/poc005b/generated/technical-report.json
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: poc-005b-real-assets-blind-review-UNSCORED
+          path: benchmarks/poc005b/generated/real-asset-ab/review/
+          if-no-files-found: error
 
       - uses: actions/upload-artifact@v4
         with:
