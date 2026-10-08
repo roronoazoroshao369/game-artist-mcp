@@ -58,7 +58,9 @@ See:
 
 **Evidence boundary:** The three live sessions were executed through a local stdio MCP transport, not an independently audited provider-origin agent host. Their image critique is SELF_REVIEW. The repository therefore retains `AGENT_PROVENANCE_PENDING` and **does not claim artistic FULL_PASS, independent aesthetics approval or production art quality**. See [POC-005A benchmark protocol](benchmarks/poc005a/README.md).
 
-The first next gate is external agent-authorship attestation and independent 64px/128px review of these and fresh held-out results. Artistic weaknesses should drive POC-005B redesign before widening scope.
+POC-005B is merged: opt-in material-aware Art IR, deterministic gradient/hand-directed surface marks/bounded glow, plus controlled same-geometry 64/128-pixel A/B review bundles for those three earlier props. The review bundles are **UNSCORED**. A fourth original compass asset was constructed through a new **self-selected** local MCP session (not an evaluator-supplied held-out prompt): 28 nodes, 14 MCP calls, 3 rendered previews and 2 image-grounded corrections. The latest correction restored an open suspension loop that an inappropriate appearance fill made visually solid. Historical revision-2 media are preserved. Technical and style gates pass, but external authorship attestation and independent visual scoring remain pending. See [POC-005B review protocol](benchmarks/poc005b/README.md) and [latest handoff](docs/project/NEXT_RUN_PROMPT.md).
+
+**Hard limits:** Material-aware Godot export is currently unsupported (`UNSUPPORTED_GODOT_APPEARANCE`), even though the legacy Spirit Lantern passes headless Godot. Green CI proves technical behavior, not aesthetic quality, autonomy or production art readiness.
 
 ## Local development
 
@@ -92,4 +94,4 @@ node ../FolderForge/dist/main.js plugin test . --call health --args-json '{}'
 
 Do not infer npm availability from FolderForge's source `package.json`; POC-002 pins source evidence until a compatible public package is actually published.
 
-The next falsification gate is POC-003: a real vision-capable agent must construct an asset, inspect the returned PNG, critique it and improve it through MCP edits.
+The next evidence gate is independent 64/128px blind visual scoring (at least one external non-author reviewer, ideally two), plus provider-attested image inspection and original authorship on an independently assigned unknown brief. The current compass trial has LOCAL STDIO provenance only, and its brief was self-selected; it must not be promoted to Autonomy GO.
