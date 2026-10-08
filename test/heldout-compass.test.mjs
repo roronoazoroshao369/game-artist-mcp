@@ -11,7 +11,7 @@ import {inspectStyle} from '../src/style/inspect.mjs';
 import {loadStyleProfile} from '../src/style/profile.mjs';
 
 const DIR=new URL('../benchmarks/poc005a/runs/astral_compass_trial_20261008/',import.meta.url).pathname;
-test('new actual MCP held-out trial passes structural audit but NOT external autonomy/visual gates', async()=>{
+test('new self-selected original MCP trial passes structural audit but NOT external autonomy/visual gates', async()=>{
  const report=await auditEvidence(DIR);
  assert.equal(report.ok,true,JSON.stringify(report.errors));
  assert.equal(report.metrics.toolCalls,9);

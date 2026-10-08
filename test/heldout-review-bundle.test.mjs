@@ -19,6 +19,10 @@ test('held-out compass reviewer packet has four real PNGs but no label mapping o
  const info=JSON.parse(await readFile(join(review,'metadata.json'),'utf8'));
  assert.equal(info.reviewerStatus,'VISUAL_REVIEW_PENDING');
  assert.equal(info.agentProvenance,'UNKNOWN');
+ assert.equal(info.independentHeldout,false,'the author selected this fresh brief; independent held-out trial is still missing');
+ assert.equal(info.briefSelection,'SELF_SELECTED_BY_ART_AUTHOR');
+ assert.equal(info.kind,'SELF_SELECTED_LOCAL_MCP_UNSCORED_APPEARANCE_ONLY');
+ assert.equal(info.qualifiesForAutonomyGo,false);
  assert.equal(info.geometryEqual,true);
  assert.equal(info.files.length,4);
  for(const f of info.files){
