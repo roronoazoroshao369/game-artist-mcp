@@ -11,6 +11,7 @@ import { loadStyleProfile } from "../style/profile.mjs";
 import { inspectStyle } from "../style/inspect.mjs";
 import { exportGodotCutout } from "../export/godot-cutout.mjs";
 import { AssetStore } from "./store.mjs";
+import { checkRenderBudget } from "./render-budget.mjs";
 
 const PROTOCOL_VERSION = "2025-11-25";
 const SERVER_VERSION = "0.0.3";
@@ -39,11 +40,15 @@ async function renderPng(document) {
   try {
     const svgPath = join(temp, "preview.svg");
     const pngPath = join(temp, "preview.png");
-    await writeFile(svgPath, renderSvg(document), "utf8");
+    const svg=renderSvg(document);
+    checkRenderBudget(svg);
+    await writeFile(svgPath, svg, "utf8");
     execFileSync("rsvg-convert", ["--format=png", "--output", pngPath, svgPath], {
-      stdio: ["ignore", "ignore", "pipe"]
+      stdio: ["ignore", "ignore", "pipe"], timeout: 8000, maxBuffer: 1048576
     });
-    return await readFile(pngPath);
+    const png=await readFile(pngPath);
+    checkRenderBudget(svg,png);
+    return png;
   } catch (error) {
     const detail = error?.stderr?.toString?.().trim();
     throw new Error(detail ? `PNG render failed: ${detail}` : "PNG render failed; rsvg-convert may be unavailable");
@@ -303,6 +308,7 @@ async function callTool(name, args) {
       const outputDir = join(store.assetDir(args.asset_id), "output");
       await mkdir(outputDir, { recursive: true, mode: 0o700 });
       const svg = renderSvg(state.document);
+      checkRenderBudget(svg);
       const svgPath = join(outputDir, "asset.svg");
       const pngPath = join(outputDir, "asset.png");
       const reportPath = join(outputDir, "report.json");

@@ -21,6 +21,20 @@ test('line and quadratic surface marks are clipped to original transformed shape
  assert.equal(svg,renderSvg(d));
 });
 
+test('spirit emission is behind normal node and bounded on canvas',()=>{
+ const d=make({material:'spirit',outerGlow:{color:'#69d7cf',opacity:0.5,radius:4}});
+ d.nodes[0].opacity=0.8;
+ d.nodes[1].appearance=undefined;
+ const svg=renderSvg(d);
+ assert.match(svg,/feGaussianBlur stdDeviation="4"/);
+ assert.match(svg,/filterUnits="userSpaceOnUse"/);
+ assert.match(svg,/filter="url\(#ga-glow-/);
+ assert.match(svg,/opacity="0.4"/);
+ assert.ok(svg.indexOf('filter="url(#ga-glow-')<svg.indexOf('id="ga-grad-0"'));
+ assert.match(svg,/width="88" height="88"/);
+ assert.equal(svg,renderSvg(d));
+});
+
 test('two gradients use safe collision-free ids and deterministic SVG',()=>{
  const d=make(grad);
  const one=renderSvg(d);

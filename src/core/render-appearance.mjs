@@ -38,6 +38,14 @@ function marksSvg(node,marks,ids,canvas,defs){
  return '  <g clip-path="url(#'+id+')">\n'+parts.join('\n')+'\n  </g>';
 }
 
+function glowSvg(node,g,ids,defs,canvas){
+ if(!g)return '';
+ const id=unique(ids,'ga-glow-');
+ defs.push('    <filter id="'+id+'" filterUnits="userSpaceOnUse" x="-12" y="-12" width="'+(canvas.width+24)+'" height="'+(canvas.height+24)+'"><feGaussianBlur stdDeviation="'+g.radius+'"/></filter>');
+ const transform=node.transform?' transform="'+esc(node.transform)+'"':'';
+ return '  <'+node.type+' '+attrs(node)+' fill="'+g.color+'" stroke="none" opacity="'+((node.opacity??1)*g.opacity)+'" filter="url(#'+id+')"'+transform+' />';
+}
+
 export function renderStyledDocument(document){
  const ids=new Set(document.nodes.map(n=>n.id));
  const defs=[],body=[];
@@ -49,6 +57,8 @@ export function renderStyledDocument(document){
    const id=unique(ids,'ga-gradient-');
    defs.push(gradient(paint,id));fill='url(#'+id+')';
   }
+  const glow=glowSvg(node,a.outerGlow,ids,defs,document.canvas);
+  if(glow)body.push(glow);
   body.push(shape(node,fill));
   const m=marksSvg(node,a.surfaceMarks,ids,document.canvas,defs);
   if(m)body.push(m);
