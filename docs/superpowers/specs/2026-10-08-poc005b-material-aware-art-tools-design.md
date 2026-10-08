@@ -1,6 +1,6 @@
 # POC-005B — Material-Aware Art Tools, Visual Quality Experiments
 
-**Status:** CONCEPT APPROVED on 2026-10-08; this written architectural specification is **PENDING USER REVIEW**. Approval of the earlier in-chat design does not authorize implementation, implementation planning, or a production-quality claim.
+**Status:** WRITTEN SPEC APPROVED by user on 2026-10-08. Implementation plan drafting is authorized; **implementation remains pending separate plan approval**. No production-quality claim is authorized.
 
 **Repository:** `roronoazoroshao369/game-artist-mcp`  
 **Baseline:** live `main` = `043f51da4f545cdfbdb7dcb2a69c501c8fae2bf6` at spec creation. The current repository, not this checkpoint, is authoritative on resume.
@@ -114,8 +114,8 @@ If visual ratings are missing: `VISUAL_REVIEW_PENDING`. If valid ratings fail ma
 
 ## 7. Delivery and stage gates
 
-1. **Current step — architectural spec only:** commit this design to a docs PR and request explicit review. No product code or implementation plan is authorized by the prior conceptual approval.
-2. **After written-spec approval:** use Superpowers `writing-plans` to create an executable TDD plan covering schema/renderer/style/MCP security, deterministic rendering, benchmark and verification. The user then reviews and chooses the execution method.
+1. **Written spec approved:** this file was committed to docs PR #8 and approved on 2026-10-08. Implementation remains blocked until the plan is separately reviewed.
+2. **Current step — writing-plans:** author an executable TDD plan covering schema/renderer/style/MCP security, deterministic rendering, benchmark and verification. The user then reviews and chooses the execution method.
 3. **After explicit plan approval:** implement in small feature PRs, tests RED→GREEN, request code review, exact-head push and PR CI, merge, post-merge main CI, documentation closeout and delete only safely merged branches; `main` alone must remain.
 4. **Independent A/B and provenance review:** obtain human/provider evidence, publish candid GO/NO-GO report. If independent validation is blocked, document the blocker rather than asserting success.
 5. Only consider atlas and cutout-character expansion after evidence shows material tools yield meaningful improvements.
@@ -127,4 +127,4 @@ If visual ratings are missing: `VISUAL_REVIEW_PENDING`. If valid ratings fail ma
 - Legacy unchanged-rendering gate is explicit; Godot treatment of new appearance is explicit and non-silent.
 - Safety and bounds are defined as requirements, and final numeric render caps must be measured and locked in the implementation plan.
 - Artistic, technical and provenance results are deliberately independent; no invented independent ratings.
-- Next gate is **USER REVIEW OF THIS WRITTEN SPEC**. No implementation is implied by its commit.
+- Next gate is **USER REVIEW OF THE WRITTEN IMPLEMENTATION PLAN**. No implementation is implied by this spec approval.
