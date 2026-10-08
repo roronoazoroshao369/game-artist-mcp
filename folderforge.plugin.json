@@ -63,6 +63,14 @@
       "export_godot_cutout": {
         "risk": "MEDIUM",
         "mutates": true
+      },
+      "style_profile_get": {
+        "risk": "LOW",
+        "mutates": false
+      },
+      "style_validate": {
+        "risk": "LOW",
+        "mutates": false
       }
     }
   }
