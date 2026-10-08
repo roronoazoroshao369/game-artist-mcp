@@ -76,7 +76,15 @@ function validateRun(run,errors) {
 }
 
 function inspectTranscript(raw,run,errors) {
- const rows=decode(raw,'transcript.jsonl').trim().split('\n');
+ const text=decode(raw,'transcript.jsonl');
+ // Fail closed on common unredacted host-auth fields and bearer credentials.
+ // Do not echo detected values in the audit report.
+ if(/"(?:authorization|api[_-]?key|access[_-]?token|refresh[_-]?token|password|secret|cookie)"\s*:/i.test(text) ||
+    /bearer\s+[a-z0-9._-]{8,}/i.test(text) ||
+    /gh[pousr]_[a-z0-9]{16,}/i.test(text)) {
+   errors.push('transcript contains sensitive credential markers; redact before auditing');
+ }
+ const rows=text.trim().split('\n');
  if(rows.length>5000)throw new Error('transcript.jsonl: line limit exceeded');
  if(rows.length===1&&!rows[0])throw new Error('transcript.jsonl: empty trace');
  const events=rows.map((line,index)=>{
