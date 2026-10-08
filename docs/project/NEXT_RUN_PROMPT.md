@@ -1,54 +1,60 @@
-# GAME ARTIST MCP — VERIFIED POC-005A TECHNICAL HANDOFF
+# GAME ARTIST MCP — POC-005B VERIFIED TECHNICAL CLOSEOUT / NEXT RUN
 
-Repository: roronoazoroshao369/game-artist-mcp
-Default and target only branch: main
-Language: Vietnamese
-Scope: POC-005A technical substrate complete; artistic/autonomy gate still BLOCKED.
+Repository: `roronoazoroshao369/game-artist-mcp`  
+Default/target remaining remote branch: `main`  
+Language: Vietnamese  
+**Authoritative rule:** this handoff may become stale; inspect live `main`, PRs, Actions and branches first.
 
-## Verified product delivery
+## Latest verified product checkpoint — 2026-10-08
 
-- Approved specification: docs/superpowers/specs/2026-10-08-poc005a-artistic-benchmark-design.md
-- Approved implementation plan: docs/superpowers/plans/2026-10-08-poc005a-artistic-benchmark.md
-- Merged product PR: #6 — Implement POC-005A ArtStyleProfile and honest real-agent evidence audit
-- PR URL: https://github.com/roronoazoroshao369/game-artist-mcp/pull/6
-- Exact final PR head: c00ab737ada86184e4b89d759c48490f424489b2
-- Exact-head push CI: 37721385142 — SUCCESS
-- PR merge-ref CI: 37721389987 — SUCCESS
-- Product merge commit on main: 205b071db5636025aab0d547870eb872e49cbb62
-- Post-merge main CI: 37721493255 — SUCCESS
-- Automatic branch cleanup: 37721565935 — SUCCESS
-- Branch listing after cleanup: exactly main, with docs/poc005a-artistic-benchmark-design and feat/poc005a-style-profile removed as safely merged ancestors.
+- Approved architectural spec: `docs/superpowers/specs/2026-10-08-poc005b-material-aware-art-tools-design.md`
+- Approved TDD implementation plan: `docs/superpowers/plans/2026-10-08-poc005b-material-aware-art-tools.md`
+- Written spec/plan documentation merged as PR #8.
+- Product implementation merged as PR #9: https://github.com/roronoazoroshao369/game-artist-mcp/pull/9
+- PR head: `156af71574c017ee6d92afc2526e0ce799a72d5b`
+- Exact head push CI: `37765648280` SUCCESS.
+- PR CI: `37765671694` SUCCESS.
+- Product merge commit on main: `45d802b08b7826cdbe6d6efd97c28e7a94f3b39b`
+- Post-merge main CI: `37765861916` SUCCESS.
+- Post-merge auto cleanup: `37765947791` SUCCESS.
+- Remote branches after cleanup: exactly `main`.
+- Local at final product head: `npm test` 61/61 PASS; `npm run check` exit 0, tracked working tree clean.
+- Native self-review comment on PR #9 (NOT a fresh independent reviewer): https://github.com/roronoazoroshao369/game-artist-mcp/pull/9#issuecomment-6058188788
 
-These are the verified project-main and CI checkpoints **before this documentation closeout commit**. Because saving this document itself advances main, always inspect live main for the new exact SHA and check its push CI/cleanup; do not treat the older product merge SHA as permanently current.
+This docs-closeout PR itself will advance main after it is merged. Do not mistake the above product commit for the latest final main once documentation merges. Verify docs exact-head CI, docs merge, post-merge main CI, and cleanup separately.
 
-## Engineering verification and delivered files
+## Product features delivered (technical substrate only)
 
-- StyleProfile validation: strict v1 schema, bounded palette/width/node budgets and allowlisted profile file.
-- Deterministic inspectStyle on Art IR; two read-only MCP tools style_profile_get/style_validate with FolderForge LOW-risk mutates:false declarations.
-- Positive and negative MCP style smoke, nonmutating revision check; POC-001/002/003/004 regression unchanged.
-- Structural evidence auditor src/benchmark/evidence-audit.mjs, CLI scripts/audit-poc005a.mjs, test/benchmark-evidence.test.mjs.
-- SHA-256 original brief, PNG signatures, safe/size-bounded regular file I/O, ordered JSONL request IDs, revision consistency, tool/op/render/correction counter derivation, bad-file/symlink/secret rejection.
-- Human reproducibility protocol: benchmarks/poc005a/README.md and benchmarks/poc005a/evidence-schema.md.
-- Latest exact-head Node unit suite: 34/34 passing; separate benchmark audit CI: 13/13 passing.
-- Godot 4.7.2 headless import/run reported GAME_ARTIST_POC004_OK.
-- Pinned FolderForge commit 59c1096167a81bef24a07fa88453f5c50e0fe64a integration built; plugin validate and child-MCP health succeeded.
-- RED evidence: CI 37720955333 failed as expected on missing auditor module before implementation. Adversarial secret-rejection RED: 37721325505 / 37721328421 failed as expected before guard. Latest GREEN: 37721385142, 37721389987; merged main GREEN: 37721493255.
+1. Byte-locked legacy SVG fingerprints for jade stone and original spirit lantern, unchanged when appearance is absent.
+2. Strict **opt-in** `node.appearance` on existing Art IR v1; metal/stone/fabric/spirit material tag is descriptive only; bounded directional gradient stops, explicit clipped surface mark lines/curves, bounded spirit emission.
+3. Deterministic SVG paint definitions with safe ID allocation, geometry-clipped hand-directed marks, bounded blur glow; no generative-image model, object prefab templates or secondary inference provider.
+4. Style validation observes effective gradient/mark/glow colors and mark stroke widths against the existing `dark-cultivation-v1` constraints. Atomic revision transactions reject invalid payloads.
+5. Strict JSON-RPC duplicate-object-key rejection, bounded message/SVG/PNG bytes, pre-read PNG file-size check, timeout-limited `rsvg-convert`.
+6. New Godot cutout export with appearance is **explicitly unsupported** (`UNSUPPORTED_GODOT_APPEARANCE`); legacy POC-004 Spirit Lantern still imports/runs with pinned Godot 4.7.2, checked in GitHub CI. Do NOT tell users new appearance exports to Godot yet.
+7. `npm run poc:005b` produces a **synthetic technical A/B fixture** with identical generic ellipse geometry, full SVG, transparent genuine 48x64 and 96x128 PNG and HTML review board. Reports reproducible hashes in CI artifact `poc-005b-technical-ab` and includes unsigned reviewer template.
+8. Full exact-head GitHub Actions also validates pinned FolderForge child-plugin integration.
 
-## Honest product gate
+## HONEST GO / NO-GO
 
-TECHNICAL DELIVERY = VERIFIED.
-FULL ARTISTIC POC-005A PASS = NOT VERIFIED.
-External benchmark blocker = BLOCKED: HOST_ACCESS.
+**TECHNICAL DELIVERY: PASS** for the narrow opt-in appearance substrate, deterministic test fixtures, legacy regression and approved CI gates.
 
-The accessible FolderForge interactive host connector returned UNAVAILABLE, MCP SSE HTTP 429. This run therefore did not create original assets through a real vision-capable writable MCP host, did not view the three real trial preview images, did not capture provider-verified tool authorship or secure independent aesthetic ratings. Synthetic evidence test fixtures are STRUCTURAL ONLY and cannot be used as real-agent results. Do not silently relabel this as autonomous success.
+**ARTISTIC QUALITY: VISUAL_REVIEW_PENDING.** No independent blind reviewer has scored actual sword, medicinal pouch, or stone censer enhanced A/B results. The small generic ellipse in CI proves rendering mechanics only.
 
-## Next primary goal — unlock REAL artistic experiments
+**AUTONOMY: AGENT_PROVENANCE_PENDING.** Prior POC-005A art operations are local stdio MCP activity with `agentProvenance=UNKNOWN`. Do not claim provider-certified authorship, natural hand-painting or production-level autonomy.
 
-1. FIRST inspect LIVE GitHub main, PRs, Actions runs, branches, this document, then verify documentation-closeout CI if it was created.
-2. Check accessible FolderForge/game-artist art tool transport; directly prove asset_create, document_apply_ops, render_preview returned image/png and style_validate callable by the vision agent. If inaccessible, report BLOCKED: HOST_ACCESS and exact technical cause, without reauthoring Task 1–6.
-3. Deliver three fresh unfamiliar original briefs: cultivation sword, medicinal herb pouch, stone incense burner; **no predefined geometry operation scripts or external generative images**.
-4. For each: agent designs via MCP -> save original render -> actually inspect pixels -> image-grounded critique -> transactional edit -> save revised render -> final technical/style validation and export. Capture run.json, transcript.jsonl, brief.md, two SVG/PNG pairs, technical-report.json and critique.md; preserve failures, budgets and all real tool requests.
-5. Run node scripts/audit-poc005a.mjs <run-directory>, verify host provenance externally, collect third-party 64px/128px review (five 1–5 categories), and record whether POC-005A Artistic PASS or NEEDS_REDESIGN. Gate expansion into POC-005B quality/cutout/atlas work on observed failures.
-6. After any new code, use TDD + exact-head CI -> merge -> post-merge main CI -> cleanup -> verify only main. Never delete unique, unmerged branch commits.
+**GAME-READY WITH NEW APPEARANCE: NO.** The current Godot cutout implementation fail-closes on opt-in appearance. This is deliberate to protect asset integrity, not a hidden PASS.
 
-No background/continuous service is implied by this handoff. Repo GitHub remains authoritative for current SHA and delivery state.
+**Review limitation:** one Native whole-branch self-review was performed and findings were fixed with RED→GREEN tests. A fresh independent code reviewer was not available; do not say that independent review occurred.
+
+## Next primary goal — honest 3-category material A/B and provenance validation
+
+1. Verify *live* main, branch list, workflow runs and this handoff; do not reimplement the already merged POC-005B foundation.
+2. Through real art tooling create **same-geometry** before/after appearance variants of the three original POC-005A categories (cultivation sword, medicinal herb pouch, stone censer) without changing their original shapes or inserting prefabs. Use `assertSameGeometryPair` to enforce identity.
+3. Render genuine transparent 64px/128px (long axis) PNG for each pair, checker/dark/light backgrounds; inspect actual pixels and record non-authored material defects at gameplay scale.
+4. Obtain **one or preferably two independent non-author blind reviewers** with signed identity/type/timestamp, 1–5 scores for recognizability, material, hierarchy, style fit, coherence. Hide A/B label mapping until ratings sealed; do not fabricate scores if reviewers unavailable.
+5. Obtain externally verified agent-host origin and image-inspection trace for fresh held-out briefs; local JSONL is never valid cryptographic provenance. Do not conflate technical A/B with authored art benchmark.
+6. Report separated TECHNICAL_PASS / VISUAL_GO or ARTISTIC_NO_GO / AUTONOMY_GO. Visual GO only if all three assets achieve >=3/5 silhouette and style at both scales, at least 2/3 improve material readability >=1 point on both scales, and neither silhouette nor style regresses >1.
+7. If material evidence passes and user approves a NEW spec, consider appearance-aware Godot cutout or atlas export; otherwise redesign art abstractions. Avoid Blender/3D/characters until 2D value is demonstrated.
+8. For any code changes: Superpowers brainstorming/spec/plan gates as appropriate → TDD RED/GREEN → review → exact-head CI → merge `main` → post-merge CI → safe branch cleanup until only `main` remains.
+
+There is no running scheduled background job. This is a handoff for a new chat/session and does not imply work continues without user action.
