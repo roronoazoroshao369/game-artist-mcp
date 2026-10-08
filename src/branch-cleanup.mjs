@@ -29,3 +29,8 @@ export function selectCleanupCandidates({ branches, mergedPulls, openPulls, main
     .map((branch) => ({ name: branch.name, sha: branch.commit.sha }))
     .sort((a, b) => a.name.localeCompare(b.name));
 }
+
+export function isMergedAncestor(comparison) {
+  return comparison?.behind_by === 0 &&
+    (comparison.status === "ahead" || comparison.status === "identical");
+}
