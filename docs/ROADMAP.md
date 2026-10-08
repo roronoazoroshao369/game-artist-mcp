@@ -205,3 +205,11 @@ The next decision is to obtain independently verifiable agent-host provenance an
 ## Earlier POC-005A delivery note
 
 The existing style profile/read-only MCP contract is supplemented with safe benchmark auditing and a runbook. Synthetic CI is STRUCTURAL ONLY. Three genuine agent-origin props, real image-based correction rounds, verified provider provenance and independent 64px/128px review remain the artistic full-pass gate. FolderForge host availability is a dependency, not an excuse to fabricate art success. POC-005B quality and atlas work will be selected from actual results.
+
+## POC-005B — material-aware technical implementation (2026-10-08)
+
+This implementation introduces strictly opt-in original Art IR appearance for directional paint, manually authored clipped wear/fold marks and bounded spirit glow. Flat legacy documents keep the original renderer path and SHA baselines. Style inspection includes appearance colors and mark stroke restrictions. Godot cutout export with new appearance is explicitly unsupported until a future separately reviewed implementation; legacy cutout remains valid.
+
+Technical A/B script `npm run poc:005b` uses **only a generic synthetic shape** to verify PNG at true 64px and 128px, controlled same-geometry variants, reproducible hashes and reviewer template. The fixture is not actual artistic proof. Before any production-quality or autonomy conclusion, still require independent blind 64/128 review of sword/pouch/censer and real provider-origin vision-agent provenance on unfamiliar asset briefs.
+
+Statuses: `TECHNICAL_ONLY` for CI fixtures, `VISUAL_REVIEW_PENDING` and `AGENT_PROVENANCE_PENDING` until separate external gates are satisfied. Do not conflate a green CI with art quality.

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { execFileSync, spawnSync } from "node:child_process";
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 
@@ -11,7 +11,7 @@ import { loadStyleProfile } from "../style/profile.mjs";
 import { inspectStyle } from "../style/inspect.mjs";
 import { exportGodotCutout } from "../export/godot-cutout.mjs";
 import { AssetStore } from "./store.mjs";
-import { checkRenderBudget } from "./render-budget.mjs";
+import { checkRenderBudget, assertPngFileSize } from "./render-budget.mjs";
 import { parseUniqueKeysJsonLine } from "./strict-json.mjs";
 
 const PROTOCOL_VERSION = "2025-11-25";
@@ -47,6 +47,7 @@ async function renderPng(document) {
     execFileSync("rsvg-convert", ["--format=png", "--output", pngPath, svgPath], {
       stdio: ["ignore", "ignore", "pipe"], timeout: 8000, maxBuffer: 1048576
     });
+    assertPngFileSize((await stat(pngPath)).size);
     const png=await readFile(pngPath);
     checkRenderBudget(svg,png);
     return png;
@@ -446,7 +447,8 @@ process.stdin.on("data", (chunk) => {
       try {
         await handle(parseUniqueKeysJsonLine(line));
       } catch {
-        // Malformed input is ignored; stdout remains a clean JSON-RPC channel.
+        // Reject malformed or ambiguous JSON without echoing untrusted content.
+        send({ jsonrpc: "2.0", id: null, error: { code: -32600, message: "Invalid JSON-RPC request" } });
       }
     });
   }
