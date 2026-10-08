@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { readFile } from "node:fs/promises";
-import { selectCleanupCandidates } from "../src/branch-cleanup.mjs";
+import { isMergedAncestor, selectCleanupCandidates } from "../src/branch-cleanup.mjs";
 
 const API = "https://api.github.com";
 const PAGE_SIZE = 100;
@@ -68,6 +68,26 @@ async function main() {
     listPages(prefix + "/pulls?state=open")
   ]);
   const selected = selectCleanupCandidates({ branches, mergedPulls, openPulls, mainSha, repoFullName });
+
+  // Squash-merged branches are covered by PR evidence above. A branch pointing
+  // at an older main commit is also safe: it has no commits outside main.
+  const selectedNames = new Set(selected.map((b) => b.name));
+  const openNames = new Set(
+    openPulls
+      .filter((pr) => pr.head?.repo?.full_name === repoFullName)
+      .map((pr) => pr.head?.ref)
+  );
+  for (const branch of branches) {
+    if (branch.name === "main" || branch.protected || selectedNames.has(branch.name) ||
+        openNames.has(branch.name)) continue;
+    const sha = branch.commit.sha;
+    const compare = await request(prefix + "/compare/" + sha + "..." + mainSha);
+    if (isMergedAncestor(compare)) {
+      selected.push({ name: branch.name, sha });
+      selectedNames.add(branch.name);
+    }
+  }
+  selected.sort((a, b) => a.name.localeCompare(b.name));
 
   console.log("main=" + mainSha + ", branches=" + branches.length + ", safe_delete=" + selected.length);
   const dryRun = process.env.BRANCH_CLEANUP_DRY_RUN === "1";
