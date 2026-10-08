@@ -10,7 +10,7 @@ export async function loadHeldoutCompassPair(){
  const events=text.trim().split(/\r?\n/).map(x=>JSON.parse(x));
  const creations=events.filter(x=>x.tool==='asset_create'&&!x.result?.isError);
  const edits=events.filter(x=>x.tool==='document_apply_ops'&&!x.result?.isError);
- if(creations.length!==1||edits.length!==2)throw new Error('expected one creation and two actual MCP revisions');
+ if(creations.length!==1||edits.length!==3)throw new Error('expected one creation and three actual MCP revisions');
  const created=creations[0];
  if(created.arguments?.asset_id!==RUN_ID||created.result?.revision!==0)throw new Error('invalid source creation');
  let state=createAssetState({version:1,canvas:{width:created.arguments.width,height:created.arguments.height,background:'transparent'},nodes:[]});
@@ -20,7 +20,7 @@ export async function loadHeldoutCompassPair(){
    idempotencyKey:e.arguments.idempotency_key,operations:e.arguments.operations});
   if(state.revision!==e.result?.revision)throw new Error('source MCP result does not match replay');
  }
- if(state.revision!==2||state.document.nodes.length!==28)throw new Error('unexpected final source geometry');
+ if(state.revision!==3||state.document.nodes.length!==28)throw new Error('unexpected final source geometry');
  const enhanced=structuredClone(state.document);
  const baseline=structuredClone(enhanced);
  let appearanceNodes=0;

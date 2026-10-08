@@ -1,16 +1,16 @@
 {
   "profileId": "dark-cultivation-v1",
-  "revision": 2,
+  "revision": 3,
   "artIr": {
     "asset_id": "astral_compass_trial_20261008",
-    "revision": 2,
+    "revision": 3,
     "ok": true,
     "errors": [],
     "warnings": []
   },
   "style": {
     "asset_id": "astral_compass_trial_20261008",
-    "revision": 2,
+    "revision": 3,
     "ok": true,
     "errors": [],
     "warnings": [],
@@ -37,7 +37,7 @@
       "invalidStrokeWidthIds": [],
       "appearance": {
         "marks": 9,
-        "gradients": 6,
+        "gradients": 5,
         "glows": 1
       }
     }
