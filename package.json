@@ -11,11 +11,12 @@
     "poc": "node scripts/run-poc.mjs",
     "mcp": "node src/mcp/server.mjs",
     "smoke:mcp": "node scripts/mcp-smoke.mjs",
-    "check": "npm test && npm run poc && npm run smoke:mcp && npm run poc:003 && npm run poc:004 && npm run poc:005b",
+    "check": "npm test && npm run poc && npm run smoke:mcp && npm run poc:003 && npm run poc:004 && npm run poc:005b && npm run poc:005b:real",
     "poc:003": "node scripts/poc003-spirit-lantern.mjs",
     "poc:004": "node scripts/poc004-godot.mjs",
     "audit:poc005a": "node --test test/benchmark-evidence.test.mjs",
     "benchmark:live": "node scripts/live-benchmark-call.mjs",
-    "poc:005b": "node scripts/poc005b-technical-sample.mjs"
+    "poc:005b": "node scripts/poc005b-technical-sample.mjs",
+    "poc:005b:real": "node scripts/poc005b-real-asset-ab.mjs"
   }
 }
