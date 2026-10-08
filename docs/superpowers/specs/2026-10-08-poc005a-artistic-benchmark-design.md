@@ -1,6 +1,6 @@
 # POC-005A — Agent-Authored Art Benchmark and ArtStyleProfile v1
 
-Status: PROPOSED — awaiting design review.
+Status: APPROVED by user on 2026-10-08 — design scope locked; implementation plan review still required.
 Date: 2026-10-08
 Target: Game Artist MCP, an independent deterministic art engine hosted by FolderForge when appropriate.
 
