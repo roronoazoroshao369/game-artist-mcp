@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { selectCleanupCandidates } from "../src/branch-cleanup.mjs";
+import { isMergedAncestor, selectCleanupCandidates } from "../src/branch-cleanup.mjs";
 
 const repoFullName = "example/art";
 const mainSha = "main-sha";
@@ -54,4 +54,12 @@ test("does not use foreign repository PRs as evidence", () => {
 
 test("requires trustworthy main/repository evidence", () => {
   assert.throws(() => selectCleanupCandidates({ branches: [], mainSha: "", repoFullName }), /incomplete/);
+});
+
+test("accepts only a fully merged ancestor commit", () => {
+  assert.equal(isMergedAncestor({ status: "ahead", ahead_by: 3, behind_by: 0 }), true);
+  assert.equal(isMergedAncestor({ status: "identical", ahead_by: 0, behind_by: 0 }), true);
+  assert.equal(isMergedAncestor({ status: "diverged", ahead_by: 3, behind_by: 2 }), false);
+  assert.equal(isMergedAncestor({ status: "behind", ahead_by: 0, behind_by: 2 }), false);
+  assert.equal(isMergedAncestor(null), false);
 });
