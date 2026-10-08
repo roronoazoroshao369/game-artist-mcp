@@ -12,6 +12,7 @@ import { inspectStyle } from "../style/inspect.mjs";
 import { exportGodotCutout } from "../export/godot-cutout.mjs";
 import { AssetStore } from "./store.mjs";
 import { checkRenderBudget } from "./render-budget.mjs";
+import { parseUniqueKeysJsonLine } from "./strict-json.mjs";
 
 const PROTOCOL_VERSION = "2025-11-25";
 const SERVER_VERSION = "0.0.3";
@@ -335,6 +336,7 @@ async function callTool(name, args) {
 
     case "export_godot_cutout": {
       const state = await store.load(args.asset_id);
+      if(state.document.nodes.some(node=>node.appearance!==undefined))throw new Error("UNSUPPORTED_GODOT_APPEARANCE");
       const outputDir = join(store.assetDir(args.asset_id), "godot");
       await rm(outputDir, { recursive: true, force: true });
       await mkdir(outputDir, { recursive: true, mode: 0o700 });
@@ -429,6 +431,11 @@ let chain = Promise.resolve();
 process.stdin.setEncoding("utf8");
 process.stdin.on("data", (chunk) => {
   buffer += chunk;
+  if(Buffer.byteLength(buffer,'utf8')>262144){
+    buffer="";
+    process.stderr.write("JSON-RPC input limit exceeded\\n");
+    return;
+  }
   for (;;) {
     const newline = buffer.indexOf("\n");
     if (newline < 0) break;
@@ -437,7 +444,7 @@ process.stdin.on("data", (chunk) => {
     if (!line) continue;
     chain = chain.then(async () => {
       try {
-        await handle(JSON.parse(line));
+        await handle(parseUniqueKeysJsonLine(line));
       } catch {
         // Malformed input is ignored; stdout remains a clean JSON-RPC channel.
       }
