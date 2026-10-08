@@ -7,6 +7,8 @@ import { join, resolve } from "node:path";
 import { applyOperations } from "../core/engine.mjs";
 import { renderSvg } from "../core/render-svg.mjs";
 import { validateDocument } from "../core/validate.mjs";
+import { loadStyleProfile } from "../style/profile.mjs";
+import { inspectStyle } from "../style/inspect.mjs";
 import { exportGodotCutout } from "../export/godot-cutout.mjs";
 import { AssetStore } from "./store.mjs";
 
@@ -173,6 +175,31 @@ const tools = [
       required: ["asset_id", "cutout"],
       additionalProperties: false
     }
+  },
+  {
+    name: "style_profile_get",
+    description: "Read a validated, allowlisted artistic style profile without modifying assets.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        profile_id: { type: "string", pattern: "^[a-z][a-z0-9-]{0,63}$" }
+      },
+      required: ["profile_id"],
+      additionalProperties: false
+    }
+  },
+  {
+    name: "style_validate",
+    description: "Check a current art document against an allowlisted style profile without modifying it.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        asset_id: { type: "string", pattern: "^[a-z0-9][a-z0-9_-]{0,63}$" },
+        profile_id: { type: "string", pattern: "^[a-z][a-z0-9-]{0,63}$" }
+      },
+      required: ["asset_id", "profile_id"],
+      additionalProperties: false
+    }
   }
 ];
 
@@ -316,6 +343,22 @@ async function callTool(name, args) {
         parts: result.parts,
         animations: result.animations,
         project: `assets/${args.asset_id}/godot`
+      });
+    }
+
+    case "style_profile_get": {
+      const profile = await loadStyleProfile(args.profile_id);
+      return textResult({ profile, version: profile.version });
+    }
+
+    case "style_validate": {
+      const profile = await loadStyleProfile(args.profile_id);
+      const state = await store.load(args.asset_id);
+      const report = inspectStyle(state.document, profile);
+      return textResult({
+        asset_id: args.asset_id,
+        revision: state.revision,
+        ...report
       });
     }
 
