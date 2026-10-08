@@ -16,6 +16,14 @@ Actual transparent PNGs are rendered for 3 assets × 2 randomly labeled A/B role
 
 This is a **retrospective controlled appearance experiment** on previously authored geometry; it is NOT evidence that a newly connected provider-authenticated AI designed new assets. It also is not proof of aesthetic improvement. Until a non-author blind review and fresh host-origin signed trial are obtained, keep `VISUAL_REVIEW_PENDING` and `AGENT_PROVENANCE_PENDING`, with Visual GO and Autonomy GO unset. Never promote the bundle to `FULL_PASS` because hashes, style checks, or CI are green.
 
+## Fresh held-out local MCP trial (2026-10-08, technical only)
+
+The original **Astral Root Compass** brief was supplied without coordinates or object recipes. A ChatGPT session manually authored 28 explicit Art IR nodes through nine actual local stdio MCP calls, inspected both returned PNGs, changed one cord path after noticing a disconnected tassel and explicitly assigned material gradients, clipped marks and glow to six nodes. The complete nine-file record is under `benchmarks/poc005a/runs/astral_compass_trial_20261008/`, including a SELF_REVIEW critique, two PNGs and a real MCP transcript. Run `npm test` to structurally audit it. The local trace remains `agentProvenance=UNKNOWN` and **cannot prove provider-attested authorship**.
+
+Run `npm run poc:005b:heldout` to reconstruct the final 28-node geometry from that transcript, strip ONLY the appearance modifiers for a same-geometry baseline, validate both documents and generate four actual 64/128 PNGs with randomized blinded A/B labels. Only `generated/heldout-compass/review/` is uploaded in the separate CI reviewer artifact. Hidden mapping and source JSON live under an ignored `internal/` folder. This reviewer package is UNSCORED; no independent reviewer or visual improvement has been demonstrated. The public source could be used to recover the mapping, so blinding depends on restricting reviewer access to the reviewer package alone.
+
+Do not merge the local self-review with a third-party rating. An independent non-author reviewer and externally verifiable provider host-authorship trace are still blockers for visual/autonomy GO.
+
 ## Independent trial
 1. Provide the vision-capable host an **unfamiliar original asset brief**, without coordinates, geometry recipes or generator service. Obtain provider-side tool-call provenance independently of the in-repo JSONL.
 2. Save original geometry and the exact same geometries with opt-in material appearance; check `assertSameGeometryPair`, stop if anything else changes.
