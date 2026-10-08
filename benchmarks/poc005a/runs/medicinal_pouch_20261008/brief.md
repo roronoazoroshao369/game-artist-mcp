@@ -1,0 +1,3 @@
+# Held-out asset brief — Medicinal Herb Pouch
+
+An original portable herb-medicine pouch carried by a wandering cultivator in a dangerous, whimsical cultivation-survival world. Stitched aged tan cloth and weathered leather protect dried medicinal roots; a little living jade leaf suggests trapped medicinal qi. Include an asymmetrical closure, hand-tied cord, and one red seal or patch suggesting careful alchemical preparation, without readable text. Strong silhouette and materials readable at 64px/128px, no UI, no captions, transparent background. Use dark-cultivation-v1 palette. The agent must author explicit editable geometry through MCP, with no predefined node coordinates or model-generated images.

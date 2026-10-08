@@ -1,0 +1,39 @@
+{
+  "profileId": "dark-cultivation-v1",
+  "revision": 2,
+  "artIr": {
+    "asset_id": "stone_censer_20261008",
+    "revision": 2,
+    "ok": true,
+    "errors": [],
+    "warnings": []
+  },
+  "style": {
+    "asset_id": "stone_censer_20261008",
+    "revision": 2,
+    "ok": true,
+    "errors": [],
+    "warnings": [],
+    "profileId": "dark-cultivation-v1",
+    "metrics": {
+      "nodeCount": 44,
+      "distinctColors": 10,
+      "observedColors": [
+        "#183838",
+        "#211c1a",
+        "#332820",
+        "#438f8d",
+        "#4d392f",
+        "#69d7cf",
+        "#725342",
+        "#a0785f",
+        "#b28a62",
+        "#b9fff4"
+      ],
+      "outOfPaletteColors": [],
+      "missingStrokeWidthIds": [],
+      "invalidStrokeWidthIds": []
+    }
+  },
+  "reviewerStatus": "SELF_REVIEW"
+}
