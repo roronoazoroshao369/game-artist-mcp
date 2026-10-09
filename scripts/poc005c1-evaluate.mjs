@@ -62,12 +62,12 @@ async function run(){
  if(command==='submit'){
   const raw=await input(option('submission',''));
   const verification=await input(option('verification',''));
-  const reviewerRecord={reviewerId:raw.reviewerId,reviewerType:'HUMAN',declaration:'NOT_ART_AUTHOR',blindExposure:verification.blindExposure||'NOT_EXPOSED'};
+  const x=validateHumanSubmission({rawSubmission:raw,session:r.session,publicManifest:r.publicManifest});
+  const reviewerRecord={reviewerId:x.reviewerId,...x.reviewerDeclaration};
   const eligible=checkEligibility({reviewerRecord,session:r.session,independentVerification:verification});
   if(!eligible.eligible)throw new Error('REVIEW_PENDING: '+eligible.reason);
-  const x=validateHumanSubmission({rawSubmission:raw,session:r.session,publicManifest:r.publicManifest});
   if(x.evidenceKind==='SYNTHETIC_TEST')throw new Error('synthetic test cannot be accepted as an independent human');
-  const receipt=await stageSubmission({submission:{...x,evidenceKind:'HUMAN_REVIEW'},eligibility:eligible,privateRoot:join(root,'internal')});
+  const receipt=await stageSubmission({submission:x,eligibility:eligible,privateRoot:join(root,'internal')});
   await writeAtomicFile({root:join(root,'internal'),relativePath:'eligibility/'+receipt.reviewerId+'.json',content:canonicalBytes(eligible)});
   console.log(JSON.stringify({reviewerId:receipt.reviewerId,staged:true,visualStatus:'REVIEW_PENDING',sha256:receipt.sha256}));return;
  }
