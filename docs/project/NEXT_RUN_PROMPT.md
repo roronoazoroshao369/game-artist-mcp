@@ -2,7 +2,15 @@
 
 Language: Vietnamese. Repository: `roronoazoroshao369/game-artist-mcp`. Default remote branch: `main`. LIVE GitHub is authoritative; this handoff may become stale.
 
-## Verified product checkpoint — 2026-10-09
+## Latest verified trust-boundary fix — 2026-10-09
+
+- **PR #19:** https://github.com/roronoazoroshao369/game-artist-mcp/pull/19, MERGED. Final product head `d01a4931ee2ee4ecf67db9fa566aacd08e7a09b0`, merge commit `55f0bcb101cea2f421aa3ac43ebe240112932706`. Exact-head push CI `37884085571` SUCCESS and PR CI `37884089534` SUCCESS; main push CI `37884186423` SUCCESS.
+- Native regression RED -> GREEN added for cross-session reviewer verification replay, false/reconstructed declarations, missing HUMAN_REVIEW evidence type, verifier=reviewer, duplicate evidence references and session/package mismatch at the lock boundary. Local full `npm run check` exit 0, **96/96 unit tests PASS**, plus `npm run poc:005c1:dry` exit 0 with technical pass, zero accepted independent human scores and REVIEW_PENDING.
+- **Breaking review-form upgrade:** reviewer must affirm a real human/non-author/no-A/B-disclosure declaration in the offline form, and review JSON must carry `reviewerDeclaration` and `evidenceKind=HUMAN_REVIEW`. The independently collected **operator-attestation file** now must include exact frozen `sessionId`, `packageDigest`, matching acknowledgement and a distinct `evidenceRef` per reviewer. DO NOT forge, post-date or mutate signed reviewer forms. Old review kits cannot be silently upgraded; freeze a NEW session.
+- Plugin Game Artist MCP 0.0.3 is connected and healthy (11 tools), but it **cannot attest that a reviewer is a real independent person**, nor sign provider-side model tool invocations. The reviewer evaluation still requires genuine non-author humans and external custody evidence; the next separate autonomy gate requires host-side attestations.
+- All source/quality evidence claims are scoped to what was run; no independent art-review result or production art certification exists.
+
+## Earlier POC-005C1 delivery checkpoint — 2026-10-09
 
 - Previous approved written spec: [POC-005C1 Hybrid Independent Visual Evaluation Spec](../superpowers/specs/2026-10-09-poc005c1-hybrid-independent-visual-evaluation-design.md), merged through PR #15 as `85d41fa5e7e71977230b7869ef0d79c6c22673a7`.
 - Approved TDD implementation plan: [POC-005C1 plan](../superpowers/plans/2026-10-09-poc005c1-hybrid-visual-evaluation.md), merged through PR #16 as `93cba70542ad7d7855429b58d61c250d2ae57b7d`.
@@ -15,7 +23,7 @@ Language: Vietnamese. Repository: `roronoazoroshao369/game-artist-mcp`. Default 
 - Product auto branch cleanup `37882878545`: **SUCCESS**.
 - Last local full `npm run check`: exit code 0 with **93/93 node tests passed**, legacy POC001/003/004/005B included; dedicated `npm run poc:005c1:dry`: exit 0.
 - New GitHub CI artifact: `poc-005c1-blind-review-UNSCORED` (exact-head CI artifact ID `11594639155`). Public reviewer-kit only, not hidden mapping or private reviewer records.
-- This documentation PR, once merged, will advance main; verify its own exact-head PR/push CI, post-merge main CI and branch cleanup before reporting final SHA.
+- Previous docs closeout PR #18 merged with final main `c358015251762146acc5572919fe0246fbfa5f6c`; its post-merge main CI `37883094893` SUCCESS and cleanup `37883175347` SUCCESS. Follow the **newer PR #19** checkpoint above instead for latest code.
 
 ## POC-005C1 delivered technical capabilities
 
@@ -32,7 +40,7 @@ Language: Vietnamese. Repository: `roronoazoroshao369/game-artist-mcp`. Default 
 
 - **Technical implementation**: PASS for the scoped offline evaluation pipeline with baseline test/CI success.
 - **Independent Artistic Quality**: **VISUAL_REVIEW_PENDING / BLOCKED: INDEPENDENT_REVIEWER**. ZERO genuine external non-author humans have been scored or verified in this ChatGPT run. Nothing has established `VISUAL_GO` or material superiority.
-- **Autonomous AI Artist**: **AGENT_PROVENANCE_PENDING**. MCP local traffic and author SELF_REVIEW are NOT provider-signed proof; the compass brief was self-selected rather than externally held-out. POC-005C2 is still separate and not authorized by C1 approval.
+- **Autonomous AI Artist**: **AGENT_PROVENANCE_PENDING**. MCP local traffic and author SELF_REVIEW are NOT provider-signed proof; the compass brief was self-selected rather than externally held-out. POC-005C2 remains a separately-scoped research/provenance problem: general permission to continue does not create provider-signed proof, nor justify calling synthetic local MCP runs independently autonomous.
 - **Code review**: This environment provided no tool to dispatch distinct implementer/reviewer subagents; user chose subagent-driven **if available**. Execution fell back to Superpowers executing-plans (Native), with task-by-task TDD and SELF_REVIEW. Do NOT call this an independent code review.
 - **Hosted verification**: identity/independence is verified manually and out of band, not cryptographically by a JSON flag. Public source can make blind labels inferable; follow operational blinding rules. Private reviewer data must never be tracked or uploaded.
 - **Godot new appearance**: unsupported (`UNSUPPORTED_GODOT_APPEARANCE`). Old POC-004 Godot was headlessly verified in CI, but this does not prove POC-005B appearance exports.
