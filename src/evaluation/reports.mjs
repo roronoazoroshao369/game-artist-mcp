@@ -1,4 +1,4 @@
-export function buildPrivateReport({session,preflight,reviewLock,reveal,verdict,advice,evaluatorId,createdAt,evidenceKind='UNSCORED'}){
+export function buildPrivateReport({session,preflight,reviewLock,reveal,verdict,advice,evaluatorId,createdAt,evidenceKind='UNSCORED',verifiedEligibility=[]}){
  const technicalStatus=preflight.technicalStatus;
  const humanBacked=evidenceKind==='HUMAN_REVIEW'&&reviewLock?.submissions?.length===session.reviewQuorum&&!!reveal?.verified;
  const visualStatus=humanBacked?verdict.visualStatus:'REVIEW_PENDING';
@@ -10,6 +10,7 @@ export function buildPrivateReport({session,preflight,reviewLock,reveal,verdict,
   failures:verdict.failures||[],deltas:humanBacked?(verdict.deltas||{}):{},scores:humanBacked?(verdict.scores||{}):{},
   reviewLockDigest:reviewLock?.lockDigest||null,mappingEvidenceHash:reveal?.evidenceHash||null,
   reviewerIds:humanBacked?reviewLock.submissions.map(x=>x.reviewerId):[],
+  reviewerVerificationReferences:humanBacked?verifiedEligibility.map(x=>({reviewerId:x.reviewerId,verificationRef:x.verificationRef,verifiedBy:x.verifiedBy})):[],
   advice:advice?.kind==='ADVISORY_ONLY'?advice:{kind:'ADVISORY_ONLY',status:'AI_TRIAGE_UNAVAILABLE'},
   evaluatorId,createdAt};
 }

@@ -94,7 +94,7 @@ async function run(){
   }
   const reveal=await revealMapping({session:r.session,reviewLock:lock,sealedMapping:r.privateMapping,sourceRoleHashes,actorId:option('evaluator-id','operator'),revealedAt});
   const verdict=scoreVisual({session:r.session,lockedReviews:submissions,mappingReveal:reveal});
-  const report=buildPrivateReport({session:r.session,preflight,reviewLock:lock,reveal,verdict,advice:{kind:'ADVISORY_ONLY',status:'AI_TRIAGE_UNAVAILABLE'},evaluatorId:option('evaluator-id','operator'),createdAt:now(),evidenceKind:'HUMAN_REVIEW'});
+  const report=buildPrivateReport({session:r.session,preflight,reviewLock:lock,reveal,verdict,advice:{kind:'ADVISORY_ONLY',status:'AI_TRIAGE_UNAVAILABLE'},evaluatorId:option('evaluator-id','operator'),createdAt:now(),evidenceKind:'HUMAN_REVIEW',verifiedEligibility});
   await writeAtomicFile({root:dir,relativePath:'final-report.json',content:canonicalBytes(report)});
   await writeAtomicFile({root:dir,relativePath:'public-report.json',content:canonicalBytes(redactPublicReport(report))});
   console.log(JSON.stringify({visualStatus:report.visualStatus,technicalStatus:report.technicalStatus,liveVisualGoClaim:report.liveVisualGoClaim,independentReviewerCount:report.independentReviewerCount}));return;

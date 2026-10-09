@@ -2,7 +2,8 @@ import {validateSubmission,canonicalBytes,sha256Bytes} from './contracts.mjs';
 import {writeAtomicFile} from './safe-io.mjs';
 export function validateHumanSubmission({rawSubmission,session,publicManifest}){
  const x=validateSubmission(rawSubmission,session);
- if(publicManifest.sessionId!==x.sessionId||publicManifest.packageDigest!==x.packageDigest)throw new Error('sourceManifestDigest / packageDigest mismatch');
+ if(publicManifest.sessionId!==x.sessionId||publicManifest.packageDigest!==x.packageDigest)throw new Error('packageDigest mismatch');
+ if(x.evidenceKind==='HUMAN_REVIEW'&&x.sourceManifestDigest!==sha256Bytes(canonicalBytes(publicManifest)))throw new Error('sourceManifestDigest mismatch');
  if(x.evidenceKind&&x.evidenceKind!=='HUMAN_REVIEW'&&x.evidenceKind!=='SYNTHETIC_TEST')throw new Error('unrecognized evidenceKind');
  return x;
 }

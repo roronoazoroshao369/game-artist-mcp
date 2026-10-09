@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {validSession,validSubmission} from './fixtures/evaluation-fixtures.mjs';
+import {canonicalBytes,sha256Bytes} from '../src/evaluation/contracts.mjs';
 import {checkEligibility} from '../src/evaluation/reviewers.mjs';
 import {validateHumanSubmission,stageSubmission} from '../src/evaluation/submissions.mjs';
 import {mkdtemp,rm} from 'node:fs/promises';
@@ -15,8 +16,9 @@ test('self declaration, AI, and absent independent proof do not count as eligibl
  assert.equal(checkEligibility({reviewerRecord,session,independentVerification:{...verified,notAuthorConfirmed:false}}).eligible,false);
 });
 test('accepts twelve blinded rows, rejects duplicates, invalid scales, or altered manifest',()=>{
- const x=validSubmission({reviewerId:'reviewer-01',evidenceKind:'HUMAN_REVIEW'});
+ const x=validSubmission({reviewerId:'reviewer-01',evidenceKind:'HUMAN_REVIEW',sourceManifestDigest:sha256Bytes(canonicalBytes(publicManifest))});
  assert.equal(validateHumanSubmission({rawSubmission:x,session,publicManifest}).rows.length,12);
+ assert.throws(()=>validateHumanSubmission({rawSubmission:{...x,sourceManifestDigest:'f'.repeat(64)},session,publicManifest}),/sourceManifestDigest/);
  assert.throws(()=>validateHumanSubmission({rawSubmission:{...x,packageDigest:'f'.repeat(64)},session,publicManifest}),/packageDigest/);
  assert.throws(()=>validateHumanSubmission({rawSubmission:{...x,rows:[x.rows[0],...x.rows.slice(0,11)]},session,publicManifest}),/duplicate/);
 });
