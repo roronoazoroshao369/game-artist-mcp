@@ -113,7 +113,7 @@
 
 - [ ] **Step 1: RED tests:** `requires challenge delivery before model decision`, `pairs tool decision, dispatch and tool result by exact toolCallId`, `requires model image-delivery evidence matching true MCP image bytes`, `rejects duplicated/reordered/missing event, swapped PNG and critique preceding image`.
 - [ ] **Step 2: RED verification:** `node --test test/provenance-events.test.mjs` fails.
-- [ ] **Step 3: Implement finite event state machine:** enforce increasing `eventSequence`, `eventDigest`/previous binding, single canonical session/nonce/challenge, valid `MODEL_TOOL_DECISION → TOOL_DISPATCH → TOOL_RESULT`, image PNG bytes digest and explicit `MODEL_IMAGE_DELIVERED` matching a prior real preview. Signed event authenticity is Task 3, not inferred from hash-chain. Reject orphan results and injected model text/tool messages that attempt to alter verifier policy.
+- [ ] **Step 3: Implement finite event state machine:** enforce increasing `eventSequence`, `eventDigest`/previous binding, single canonical session/nonce/challenge, valid `MODEL_TOOL_DECISION → TOOL_DISPATCH → TOOL_RESULT`, image PNG bytes digest and explicit `MODEL_IMAGE_DELIVERED` matching a prior real preview. Compute `eventDigest=SHA256('GameArtist/POC005C2/event/v1\\0' || canonicalBytes(event without eventDigest))` and bind each `prevEventDigest` to the prior event; the \\0 denotes one literal NUL separator byte, not a two-character backslash escape. Signed event authenticity is Task 3, not inferred from hash-chain. Reject orphan results and injected model text/tool messages that attempt to alter verifier policy.
 - [ ] **Step 4: GREEN verification:** `node --test test/provenance-events.test.mjs` PASS. Diagnostics must use field names and offsets only, never secrets.
 - [ ] **Step 5: Commit** `git add src/provenance/event-audit.mjs test/provenance-events.test.mjs && git commit -m "feat(provenance): audit model tool and image event causality"`.
 
@@ -138,9 +138,9 @@
 - Create: `scripts/poc005c2-audit.mjs`
 - Test: `test/provenance-cli.test.mjs`
 
-**Interfaces:** `buildProvenanceReport({challenge,capabilities,attestations,events,workflow}): PrivateReport`; `redactProvenanceReport(report): PublicReport`. CLI: `node scripts/poc005c2-audit.mjs --session <PRIVATE_SESSION_DIR> --policy <VERIFIER_OWNED_POLICY_JSON> --public-out <PRIVATE_REPORT_OUTPUT>`.
+**Interfaces:** `buildProvenanceReport({challenge,capabilities,attestations,events,workflow}): PrivateReport`; `redactProvenanceReport(report): PublicReport`; `aggregateProvenanceRuns({reports,expectedChallengeIds}): {strictProviderGo:boolean,reasons:string[],trialCount:number}`. The aggregator requires exactly three precommitted distinct challenge IDs and includes all attempted/failed runs; it refuses duplicate, missing, best-of-N and `SYNTHETIC_TEST` reports. CLI: `node scripts/poc005c2-audit.mjs --session <PRIVATE_SESSION_DIR> --policy <VERIFIER_OWNED_POLICY_JSON> --public-out <PRIVATE_REPORT_OUTPUT>`.
 
-- [ ] **Step 1: RED tests:** invalid or missing signed provider receipt yields `AGENT_PROVENANCE_PENDING`; a witness-verified host tier may produce `HOST_ATTESTED_AUTONOMY` only when trust policy independent; unknown provider yields `BLOCKED: PROVIDER_ATTESTATION_UNAVAILABLE`; leaking brief text/PII/auth header/tokens never appears in a redacted report; refuses symlinked private files and output under tracked repo.
+- [ ] **Step 1: RED tests:** invalid or missing signed provider receipt yields `provenanceStatus:'UNVERIFIED'` with explicit blocking reason `AGENT_PROVENANCE_PENDING`; a witness-verified host tier may produce `HOST_ATTESTED_AUTONOMY` only when trust policy independent; unknown provider yields `BLOCKED: PROVIDER_ATTESTATION_UNAVAILABLE`; leaking brief text/PII/auth header/tokens never appears in a redacted report; refuses symlinked private files and output under tracked repo.
 - [ ] **Step 2: RED verification:** `node --test test/provenance-cli.test.mjs` fails.
 - [ ] **Step 3: Implement offline CLI/report:** read bounded no-follow private inputs using already audited `src/evaluation/safe-io.mjs`; fail on schema mismatch, unsafe paths or secret-bearing envelopes without exposing their contents. Compute `technicalStatus`, `workflowStatus`, `provenanceStatus`, `visualStatus:VISUAL_REVIEW_PENDING` separately. Provider strict GO **only** if Task 3 establishes real provider-origin proof for all three genuine runs; synthetic test inputs, absent witness or missing human review can never produce `FULL_PASS` or `PRODUCTION_READY`.
 - [ ] **Step 4: GREEN verification:** `node --test test/provenance-cli.test.mjs`; `node scripts/poc005c2-audit.mjs --help` documents inputs without opening external sessions; fixture CLI exits nonzero or explicit `BLOCKED` as appropriate.
@@ -155,7 +155,7 @@
 - Modify: `benchmarks/poc005c2/README.md`
 - Test: `test/provenance-integration.test.mjs`
 
-**Interface:** `npm run poc:005c2:audit:dry` creates a synthetic, marked test bundle under ignored generated root, checks structural gates, prints `TECHNICAL_PASS / AGENT_PROVENANCE_PENDING / VISUAL_REVIEW_PENDING` and **never** issues live autonomy GO.
+**Interface:** `npm run poc:005c2:audit:dry` creates a synthetic, marked test bundle under ignored generated root, checks structural gates, prints `technicalStatus:TECHNICAL_PASS / provenanceStatus:UNVERIFIED (AGENT_PROVENANCE_PENDING) / visualStatus:VISUAL_REVIEW_PENDING` and **never** issues live autonomy GO.
 
 - [ ] **Step 1: RED tests:** `CI never passes provider credentials to model calls`, `synthetic bundle is never eligible for strict autonomy GO`, `three-run aggregation fails with missing/partial/sorted-best runs`, `no private receipts, hidden briefs, keys or attestations uploaded by glob`.
 - [ ] **Step 2: RED verification:** `node --test test/provenance-integration.test.mjs` fails.
