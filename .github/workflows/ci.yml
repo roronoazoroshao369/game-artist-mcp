@@ -77,6 +77,9 @@ jobs:
       - name: Render held-out compass same-geometry 64/128 blind A/B (UNSCORED)
         run: npm run poc:005b:heldout
 
+      - name: Generate POC-005C1 UNSCORED human blind review kit (technical-only)
+        run: npm run poc:005c1:dry
+
       - name: Generate POC-004 Godot cutout project
         run: npm run poc:004
 
@@ -137,6 +140,12 @@ jobs:
         with:
           name: poc-005b-heldout-compass-UNSCORED
           path: benchmarks/poc005b/generated/heldout-compass/review/
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: poc-005c1-blind-review-UNSCORED
+          path: benchmarks/poc005c1/generated/review/
           if-no-files-found: error
 
       - uses: actions/upload-artifact@v4

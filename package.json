@@ -18,6 +18,7 @@
     "benchmark:live": "node scripts/live-benchmark-call.mjs",
     "poc:005b": "node scripts/poc005b-technical-sample.mjs",
     "poc:005b:real": "node scripts/poc005b-real-asset-ab.mjs",
-    "poc:005b:heldout": "node scripts/poc005b-heldout-compass-review.mjs"
+    "poc:005b:heldout": "node scripts/poc005b-heldout-compass-review.mjs",
+    "poc:005c1:dry": "node scripts/poc005c1-evaluate.mjs dry"
   }
 }
