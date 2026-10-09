@@ -1,52 +1,51 @@
-# GAME ARTIST MCP — POC-005B CORRECTED VISUAL LOOP / NEXT RUN
+# GAME ARTIST MCP — POC-005C1 IMPLEMENTATION CLOSEOUT / NEXT RUN
 
-Repository: `roronoazoroshao369/game-artist-mcp`  
-Remote default branch and **only intended remaining branch**: `main`  
-Communication: Vietnamese.  
-Source of truth: inspect live GitHub `main`, PRs, workflows and remote branches first; this handoff can become stale.
+Language: Vietnamese. Repository: `roronoazoroshao369/game-artist-mcp`. Default remote branch: `main`. LIVE GitHub is authoritative; this handoff may become stale.
 
-## Latest VERIFIED product checkpoint — 2026-10-08
+## Verified product checkpoint — 2026-10-09
 
-- Verified product `main`: `47aa1055855cc11b5cae2883f0fdbe0d036c76bf` (merged PR #13).
-- PR #11: https://github.com/roronoazoroshao369/game-artist-mcp/pull/11 — retrospective same-geometry A/B for sword, herb pouch and stone censer (12 real alpha PNGs), merged as `7c67f93928d747abafc88a9e52287da5c270e905`.
-- PR #12: https://github.com/roronoazoroshao369/game-artist-mcp/pull/12 — NEW SELF-SELECTED compass local MCP trial, 9 original calls and image inspection, merged as `2564484acd8ca716818f4922a6917dd8a0054b71`. This was **not** an independently assigned held-out prompt.
-- PR #13: https://github.com/roronoazoroshao369/game-artist-mcp/pull/13 — image-grounded second correction of the compass's open bronze loop, preserving revision-2 intermediate PNG/SVG and maintaining full local MCP trace.
-- PR #13 final head: `53b177ff8e8bbdfe499c74cb278dfd63d9dc9d0c`.
-- Exact final push CI: `37813891318` **SUCCESS**; PR CI: `37813899741` **SUCCESS** (same head). Includes Godot 4.7.2 headless and pinned FolderForge child-MCP integration.
-- Product merge commit: `47aa1055855cc11b5cae2883f0fdbe0d036c76bf`.
-- Post-merge `main` CI `37814117901` **SUCCESS**; automatic branch cleanup `37814232821` **SUCCESS**.
-- Verified remote branches after cleanup: **only `main`**.
-- Verified local `npm run check` exit 0; **70/70 tests pass**, including new MCP trial and real 64/128px A/B comparison.
-- This documentation closeout, once merged, will advance `main` again. Always verify docs PR exact-head push/PR CI, docs merge, new post-merge main CI and branch cleanup separately.
+- Previous approved written spec: [POC-005C1 Hybrid Independent Visual Evaluation Spec](../superpowers/specs/2026-10-09-poc005c1-hybrid-independent-visual-evaluation-design.md), merged through PR #15 as `85d41fa5e7e71977230b7869ef0d79c6c22673a7`.
+- Approved TDD implementation plan: [POC-005C1 plan](../superpowers/plans/2026-10-09-poc005c1-hybrid-visual-evaluation.md), merged through PR #16 as `93cba70542ad7d7855429b58d61c250d2ae57b7d`.
+- Product PR #17: https://github.com/roronoazoroshao369/game-artist-mcp/pull/17 **MERGED**.
+- Product PR exact final head: `54d4e2d5c09c7335626c3ceeaa767cd1595bf119`.
+- Exact-head push CI `37882717101`: **SUCCESS**.
+- Exact-head pull_request CI `37882721200`: **SUCCESS**.
+- Product merge commit on main: `9309784546d825908af90d712cfbbb262519db86`.
+- Product post-merge main CI `37882814514`: **SUCCESS**.
+- Product auto branch cleanup `37882878545`: **SUCCESS**.
+- Last local full `npm run check`: exit code 0 with **93/93 node tests passed**, legacy POC001/003/004/005B included; dedicated `npm run poc:005c1:dry`: exit 0.
+- New GitHub CI artifact: `poc-005c1-blind-review-UNSCORED` (exact-head CI artifact ID `11594639155`). Public reviewer-kit only, not hidden mapping or private reviewer records.
+- This documentation PR, once merged, will advance main; verify its own exact-head PR/push CI, post-merge main CI and branch cleanup before reporting final SHA.
 
-## What actually works
+## POC-005C1 delivered technical capabilities
 
-1. POC-001/002: deterministic explicit vector art, revision-checked atomic operations, stdio MCP and FolderForge plugin contract.
-2. POC-003/004: original Spirit Lantern visual feedback loop and legacy Godot cutout exported/verified headlessly. Appearance-bearing Godot cutout still **UNSUPPORTED**.
-3. POC-005A: original prior local sword, medicinal pouch, stone censer operations and technical evidence audits; all have genuine PNG before/after and SELF_REVIEW only.
-4. POC-005B: explicit, opt-in directional gradients, clipped artist-authored surface marks, bounded glow, strict style/security/render budgets and locked legacy SVG fingerprints.
-5. Controlled A/B for three original local assets: real PNGs at 64px/128px long axis, same source geometry, random A/B labels, light/dark/checkerboard reviewer board. CI artifact: `poc-005b-real-assets-blind-review-UNSCORED`.
-6. Fourth **SELF-SELECTED** original compass session: `benchmarks/poc005a/runs/astral_compass_trial_20261008/`. **14 actual local stdio MCP tool calls, 36 explicit geometry/appearance operations, three real previews, two image-grounded revisions, final revision 3, 28 nodes**. The latest material design has five gradients, nine marks, one glow. Art IR/style validation passed.
-7. Source revision 2 looked like a filled brass nub at the top loop. Root cause: `suspension_loop_metal` is an open stroke-only SVG path with `fill:none`, and its explicit `appearance.basePaint` triggered an implicitly closed SVG fill. The author removed that node's basePaint in revision 3 through a genuine MCP `node.update`, preserving the loop hole and all geometry/strokes. `intermediate-r2.png` and `intermediate-r2.svg` preserve the failed appearance; `initial.png` and `revised.png` remain the run's outer before/after checkpoints.
-8. Controlled same-FINAL-geometry compass A/B in `npm run poc:005b:heldout` (legacy filename only): new CI artifact `poc-005b-heldout-compass-UNSCORED`. Its metadata explicitly says `briefSelection=SELF_SELECTED_BY_ART_AUTHOR`, `independentHeldout=false`, `qualifiesForAutonomyGo=false`, `agentProvenance=UNKNOWN`, `VISUAL_REVIEW_PENDING`.
+1. `src/evaluation/contracts.mjs`, `safe-io.mjs`: versioned strict JSON parsing (including duplicate-key rejection), canonical digest, allowlisted IDs, bounds, no-follow file reads, atomic writes.
+2. `preflight.mjs`: freeze the original three POC-005A source props and generate 12 actual baseline/enhanced A/B alpha PNGs at native 64px/128px. Same geometry except appearance; validate source documents, source SVG, PNG structure/CRC/pixel dimensions and recomputed raster hash with pinned renderer.
+3. `review-kit.mjs`, `reviewer-ui.mjs`: reviewer-only static HTML/CSS/JS, blinded A/B, checker/dark/light backgrounds, five 1–5 criteria over all 12 cells, offline JSON export. No external CDN or generative asset model required.
+4. `reviewers.mjs`, `submissions.mjs`: requires human non-author declaration, privately operator-verified out-of-band reference, full 12-score sheet and frozen `sourceManifestDigest`. A plain JSON claim **does not** independently prove identity; operator must really verify the human.
+5. `lifecycle.mjs`, `locking.mjs`: fixed review quorum (1 or 2 humans), lock before revealing a sealed map, verify hashes and role source bindings. Missing quorum returns REVIEW_PENDING.
+6. `verdict.mjs`: deterministic thresholds for 64/128 native sizes, two-of-three material improvements and silhouette/style stability, exact half-point arithmetic and disagreement freeze.
+7. `advice.mjs`, `reports.mjs`: AI is ADVISORY_ONLY, separate private/redacted reports and explicit `AGENT_PROVENANCE_PENDING`. Pure synthetic numeric fixtures are NOT independently verified artistic evidence.
+8. `scripts/poc005c1-evaluate.mjs` CLI `dry`, `freeze`, `validate`, `submit`, `decide`; CI uploads only ignored `benchmarks/poc005c1/generated/review/` artifacts.
 
-## NON-NEGOTIABLE evidence boundary
+## CRITICAL evidence boundaries
 
-- TECHNICAL DELIVERY: **PASS** for narrow POC-005B implementation and technical A/B experiment, supported by exact-head and post-merge CI.
-- ARTISTIC QUALITY: **VISUAL_REVIEW_PENDING**. No non-author independent blind ratings were supplied or verified. Do not infer VISUAL GO, material superiority or production quality from two visibly different hashes or SELF_REVIEW.
-- AUTONOMY: **AGENT_PROVENANCE_PENDING**. The art operations are genuine LOCAL STDIO MCP traffic, not provider-signed model-authorship traces. The additional compass brief was **self-selected** by the producing session, NOT an independently supplied unknown brief.
-- Production Godot with new appearance: **NOT SUPPORTED**; still explicit `UNSUPPORTED_GODOT_APPEARANCE`. Only the legacy POC-004 Godot vertical slice is green.
-- Fresh independent code review and external art reviewer: **NOT OBSERVED**. Do not invent reviewers, identities, timestamps or scores.
-- The public source allows someone to reconstruct which A/B images contain appearance, so blinding is **operational**: show only the reviewer ZIP to non-authors, and record exposure limitations. No cryptographic blind-rating guarantee.
-- The generic open-path/appearance fill hazard remains in the renderer contract even though the individual compass ARTWORK was corrected. Do not silently change renderer semantics; obtain a separate spec/plan approval and consider a guard, a warning or dedicated stroke-paint semantics with compatibility tests.
+- **Technical implementation**: PASS for the scoped offline evaluation pipeline with baseline test/CI success.
+- **Independent Artistic Quality**: **VISUAL_REVIEW_PENDING / BLOCKED: INDEPENDENT_REVIEWER**. ZERO genuine external non-author humans have been scored or verified in this ChatGPT run. Nothing has established `VISUAL_GO` or material superiority.
+- **Autonomous AI Artist**: **AGENT_PROVENANCE_PENDING**. MCP local traffic and author SELF_REVIEW are NOT provider-signed proof; the compass brief was self-selected rather than externally held-out. POC-005C2 is still separate and not authorized by C1 approval.
+- **Code review**: This environment provided no tool to dispatch distinct implementer/reviewer subagents; user chose subagent-driven **if available**. Execution fell back to Superpowers executing-plans (Native), with task-by-task TDD and SELF_REVIEW. Do NOT call this an independent code review.
+- **Hosted verification**: identity/independence is verified manually and out of band, not cryptographically by a JSON flag. Public source can make blind labels inferable; follow operational blinding rules. Private reviewer data must never be tracked or uploaded.
+- **Godot new appearance**: unsupported (`UNSUPPORTED_GODOT_APPEARANCE`). Old POC-004 Godot was headlessly verified in CI, but this does not prove POC-005B appearance exports.
+- **Production quality**: NOT ESTABLISHED. CI passing does not replace artwork quality ratings.
 
-## Next PRIMARY GOAL — independent reviewer + host-origin validation
+## PRIMARY GOAL NEXT RUN — authentic independent blind visual review
 
-1. Inspect live `main`, PRs, Actions, branches; do not redo POC-005B engineering or the compass correction.
-2. Obtain one, preferably two, **external non-author blind art reviewers**. Give each only the reviewer bundles. Record signed reviewer identity/type/time, scores at actual 64/128 long-axis sizes for recognizability/silhouette, material readability, visual hierarchy, style-fit and consistency (1–5). Store ratings and score sheets **without invented values**. If no reviewer can be engaged, report **BLOCKED: INDEPENDENT_REVIEWER**.
-3. Require each of the three original categories to score at least 3/5 on silhouette and style at both sizes, at least two categories to gain >=1 material-readability point at both sizes, and no more than 1 point regression on silhouette or style. Preserve disagreements; do not count the self-selected compass as the evaluator-supplied unknown brief.
-4. Arrange a **separately supplied UNKNOWN held-out brief** and a vision-enabled agent host with provider-origin attestation and image-visible tool-call traces. The host must author/edit via real Game Artist MCP and inspect pixels between revisions. Local transcript `JSONL` is insufficient to certify author or perception. Without attestation, report **BLOCKED: PROVIDER_ORIGIN** and do not claim AUTONOMY_GO.
-5. If independent review demonstrates a material readability failure, derive a narrow art-abstraction redesign SPEC based on observed defects. Consider an explicitly approved validator/style/UX guard to prevent unwanted fill on open stroke-only paths. If visual GO and real host attestation succeed, propose appearance-aware Godot cutout or atlas next, each via separate approved spec.
-6. For any authorized code change: Superpowers brainstorming/spec/plan gates where required → TDD red/green → code review (label SELF_REVIEW if no independent reviewer) → exact-head push & PR CI success → merge `main` → post-merge main CI success → safe branch cleanup to only `main` → update this handoff.
+1. Verify live main, all open PRs, latest completed main CI, and remote branch list. Do not restart the evaluation engine or redo the 8 finished tasks.
+2. Run `npm run poc:005c1:dry` to inspect the reviewer-only UNSCORED package, or use `node scripts/poc005c1-evaluate.mjs freeze --session-id <new-unique-id> --out <PRIVATE_PATH_OUTSIDE_REPO> --source-sha <EXACT_MAIN_SHA> --quorum 1|2`. Choose quorum before release, ideally 2.
+3. Recruit at least one (ideally two) real human game artists/technical artists NOT involved with creating these assets; collect their blind 1–5 scores at native 64/128 pixels. Give them only the reviewer kit; no A/B mapping, author commentary, AI critic hints, or source files. Verify eligibility independently outside GitHub and retain their confirmation privately.
+4. Use CLI `submit` to validate and stage signed/acknowledged submissions plus operator-controlled verification references. Lock BEFORE revealing mapping; use CLI `decide` to compute the real visual verdict and inspect disagreements. Do not synthesize reviewers or scores. If none are available, report BLOCKED and keep REVIEW_PENDING.
+5. Visual GO gate: each of three original asset categories enhanced silhouette and style >=3/5 at BOTH 64px and 128px; at least two categories gain >=1 material at both scales; no silhouette or style regression >1; disagreement >=2 points between two reviewers blocks resolution.
+6. When real independent review exists, use findings to prioritize targeted art/renderer improvements (open SVG path fill hazard remains a possible general design issue) or spec POC-005C2 provider-attested autonomy benchmark separately. No automatic new scope, no unapproved Godot/3D expansion.
+7. For further authorized code work: Superpowers brainstorming/spec/plan approvals where applicable → TDD RED→GREEN → independent code-review tool if available (otherwise explicit SELF_REVIEW) → exact-head push + PR CI → merge main → post-merge CI → safe branch cleanup only main → update handoff.
 
-There is **no recurring/background execution** implied by this file. This is a documented resumption plan. Never claim full autonomous production-quality art until the independent gates actually pass.
+**No background/recurring execution is currently running.** This file is a resumption guide and does not itself create a schedule or independently validate humans.
