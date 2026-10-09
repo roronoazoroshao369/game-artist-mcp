@@ -77,12 +77,19 @@ export function validateEligibility(x){
  return structuredClone(x);
 }
 export function validateSubmission(x,session){
- keys(x,['schemaVersion','sessionId','reviewerId','rubricVersion','packageDigest','submittedAt','rows'],['submissionId','notes','sourceManifestDigest','evidenceKind']);
+ keys(x,['schemaVersion','sessionId','reviewerId','rubricVersion','packageDigest','submittedAt','rows'],['submissionId','notes','sourceManifestDigest','evidenceKind','reviewerDeclaration']);
  ensure(x.schemaVersion===1&&x.rubricVersion===1,'submission version');
  ensure(x.sessionId===session.sessionId,'wrong sessionId');
  ensure(x.packageDigest===session.packageDigest,'wrong packageDigest');
  id(x.reviewerId,'reviewerId');date(x.submittedAt,'submittedAt');
  if(x.submissionId)id(x.submissionId,'submissionId');
+ if(x.reviewerDeclaration!==undefined){
+  keys(x.reviewerDeclaration,['reviewerType','declaration','blindExposure','acknowledgedAt']);
+  ensure(x.reviewerDeclaration.reviewerType==='HUMAN','reviewerDeclaration reviewerType');
+  ensure(x.reviewerDeclaration.declaration==='NOT_ART_AUTHOR','reviewerDeclaration author conflict');
+  ensure(x.reviewerDeclaration.blindExposure==='NOT_EXPOSED','reviewerDeclaration blind exposure');
+  date(x.reviewerDeclaration.acknowledgedAt,'reviewerDeclaration.acknowledgedAt');
+ }
  if(x.notes!==undefined)ensure(typeof x.notes==='string'&&x.notes.length<=2000,'notes too long');
  ensure(Array.isArray(x.rows)&&x.rows.length===12,'submission requires exactly 12 rows');
  const seen=new Set();

@@ -10,8 +10,10 @@ export async function lockReview({session,submissions,verifiedEligibility,evalua
  const ids=submissions.map(s=>s.reviewerId);if(new Set(ids).size!==session.reviewQuorum)throw new Error('REVIEW_PENDING: duplicate reviewer');
  for(const s of submissions){
   if(s.sessionId!==session.sessionId||s.packageDigest!==session.packageDigest||s.rows?.length!==12||s.evidenceKind!=='HUMAN_REVIEW')throw new Error('REVIEW_PENDING: invalid human submission');
-  if(!verifiedEligibility.some(v=>v.eligible===true&&v.reviewerId===s.reviewerId&&v.verificationRef))throw new Error('REVIEW_PENDING: missing independent eligibility');
+  if(!verifiedEligibility.some(v=>v.eligible===true&&v.reviewerId===s.reviewerId&&v.sessionId===session.sessionId&&v.packageDigest===session.packageDigest&&v.verificationRef&&v.verifiedBy!==s.reviewerId))throw new Error('REVIEW_PENDING: missing session-bound independent eligibility');
  }
+ const refs=verifiedEligibility.map(e=>e.verificationRef);
+ if(refs.some(r=>typeof r!=='string'||!r)||new Set(refs).size!==session.reviewQuorum)throw new Error('REVIEW_PENDING: duplicate/invalid verificationRef across reviewers');
  const entries=submissions.map(s=>({reviewerId:s.reviewerId,submissionId:s.submissionId||s.reviewerId,sha256:sha256Bytes(canonicalBytes(s))})).sort((a,b)=>a.reviewerId.localeCompare(b.reviewerId));
  const body={schemaVersion:1,sessionId:session.sessionId,packageDigest:session.packageDigest,reviewQuorum:session.reviewQuorum,submissions:entries,evaluatorId,lockedAt};
  const lockDigest=sha256Bytes(canonicalBytes(body));
