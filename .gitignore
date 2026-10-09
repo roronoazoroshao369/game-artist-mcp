@@ -5,3 +5,4 @@ coverage/
 .game-artist-workspace/
 examples/**/generated/
 benchmarks/poc005b/generated/
+benchmarks/poc005c1/generated/

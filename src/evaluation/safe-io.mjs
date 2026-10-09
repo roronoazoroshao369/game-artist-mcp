@@ -1,4 +1,5 @@
 import {open,mkdir,lstat,rename,rm} from 'node:fs/promises';
+import {constants} from 'node:fs';
 import {join,resolve,relative,sep,dirname,parse} from 'node:path';
 import {randomBytes} from 'node:crypto';
 const token=/^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,120}$/;
@@ -15,7 +16,7 @@ async function checkChain(root,parts){
 }
 export async function readBoundedFile({root,relativePath,maxBytes=262144}){
  const {target,parts}=allowedPath(root,relativePath);await checkChain(root,parts);
- const f=await open(target,'r');try{
+ const f=await open(target,constants.O_RDONLY|constants.O_NOFOLLOW|constants.O_NONBLOCK);try{
   const s=await f.stat();if(!s.isFile()||s.size>maxBytes)throw new Error('size limit / not regular file');
   const data=await f.readFile();if(data.length>maxBytes)throw new Error('size limit');return data;
  }finally{await f.close();}

@@ -1,5 +1,6 @@
-import {readFile,mkdir,writeFile,lstat} from 'node:fs/promises';
+import {readFile,mkdir,mkdtemp,rm} from 'node:fs/promises';
 import {join,resolve} from 'node:path';
+import {tmpdir} from 'node:os';
 import {inflateSync} from 'node:zlib';
 import {randomBytes} from 'node:crypto';
 import {ASSETS,loadRevisedDocument,createMaterialPair} from '../benchmark/real-asset-pairs.mjs';
@@ -30,8 +31,11 @@ export function validatePngBytes(bytes,width,height){
   offset+=12+len;
  }
  if(!iend||ihdr!==1||!idat.length)throw new Error('PNG incomplete');
- const raw=inflateSync(Buffer.concat(idat),{maxOutputLength:width*height*5+height+65536});
- if(!raw.length)throw new Error('empty PNG raster');
+ const channels=colorType===6?4:2;
+ const expectedRaw=height*(1+width*channels);
+ const raw=inflateSync(Buffer.concat(idat),{maxOutputLength:expectedRaw+1});
+ if(raw.length!==expectedRaw)throw new Error('PNG pixel payload length');
+ for(let y=0;y<height;y++)if(raw[y*(1+width*channels)]>4)throw new Error('PNG unsupported scanline filter');
  return {width,height,colorType};
 }
 const canvasFiles=(asset)=>['A','B'].flatMap(label=>[64,128].map(size=>({asset,label,size})));
@@ -107,8 +111,12 @@ export async function preflightSession({session,publicManifest,privateMapping,ro
    if(rerender){
     const role=privateMapping.mapping[f.asset][f.label];
     const doc=JSON.parse((await readBoundedFile({root,relativePath:'internal/'+f.asset+'-'+role+'.json',maxBytes:524288})).toString());
-    // Reproducible source/pixel evidence frozen through source SVG hash, PNG SHA and pinned rasterizer version.
     if(hex(Buffer.from(renderSvg(doc)))!==session.sourcePairs.find(s=>s.asset===f.asset).svgHashes[role])throw new Error('source SVG mismatch');
+    const checkRoot=await mkdtemp(join(tmpdir(),'evaluation-png-verify-'));
+    try{
+     const expected=await renderReviewPng({document:doc,limitPx:f.size,outputFile:join(checkRoot,'verified.png')});
+     if(expected.rendererVersion!==session.rendererVersion||expected.sha256!==f.sha256||expected.width!==f.width||expected.height!==f.height)throw new Error('rerendered PNG bytes disagree with frozen manifest');
+    }finally{await rm(checkRoot,{recursive:true,force:true});}
    }
   }
  }catch(e){errors.push(e.message);}
