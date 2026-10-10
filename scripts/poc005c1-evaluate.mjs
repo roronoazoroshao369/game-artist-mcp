@@ -5,6 +5,7 @@ import {join,resolve,sep} from 'node:path';
 import {execFileSync} from 'node:child_process';
 import {freezeSourceSession,preflightSession} from '../src/evaluation/preflight.mjs';
 import {buildOfflineReviewKit} from '../src/evaluation/review-kit.mjs';
+import {assertCleanMainCheckout} from '../src/evaluation/source-checkout.mjs';
 import {parseEvaluationJson,canonicalBytes,sha256Bytes} from '../src/evaluation/contracts.mjs';
 import {readBoundedFile,writeAtomicFile} from '../src/evaluation/safe-io.mjs';
 import {checkEligibility} from '../src/evaluation/reviewers.mjs';
@@ -48,7 +49,7 @@ async function run(){
   const root=resolve(out),repo=resolve(process.cwd());
   if(root===repo||root.startsWith(repo+sep))throw new Error('private reviewer session must be outside tracked repo');
   const sourceSha=option('source-sha',sha());
-  if(sourceSha!==sha())throw new Error('source SHA does not match checked-out repository HEAD');
+  assertCleanMainCheckout({cwd:process.cwd(),expectedSha:sourceSha});
   const r=await runFreeze(root,option('session-id',''),sourceSha,quorum);
   const kit=await buildOfflineReviewKit({publicManifest:r.publicManifest,publicAssetRoot:join(root,'review'),outputDir:join(root,'reviewer-kit')});
   console.log(JSON.stringify({sessionId:r.session.sessionId,technicalStatus:'TECHNICAL_PASS',visualStatus:'REVIEW_PENDING',kitRoot:kit.kitRoot,kitDigest:kit.kitDigest}));return;
